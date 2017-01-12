@@ -1,0 +1,1202 @@
+[
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_CalendarYearField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_CalendarYear' ,  \n IF(vSC_DateType='POSTING',  'Posting_CalendarYear', 'Create_CalendarYear'))",
+    "description": "This variable will be used in the CalendarYear list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "4c804505-b906-4df4-85ec-9d319b4f9ce3"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_FiscalYearField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_FiscalYear' ,  \n IF(vSC_DateType='POSTING',  'Posting_FiscalYear', 'Create_FiscalYear'))",
+    "description": "This variable will be used in the Fiscal Year list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "b807d752-3867-4427-9629-230ee6a07f36"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_QuarterField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_QuarterCalendarText' ,  \n IF(vSC_DateType='POSTING',  'Posting_QuarterCalendarText', 'Create_QuarterCalendarText'))",
+    "description": "This variable will be used in the Quarter list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "f68c3948-41c7-491f-9f85-590385caf3dc"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_PeriodField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_PeriodOfYearNumber' ,  \n IF(vSC_DateType='POSTING',  'Posting_PeriodOfYearNumber', 'Create_PeriodOfYearNumber'))",
+    "description": "This variable will be used in the Period list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "a3986385-fe01-4346-b684-a6c34eb55311"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_MonthField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_Month' ,  \n IF(vSC_DateType='POSTING',  'Posting_Month', 'Create_Month'))",
+    "description": "This variable will be used in the Month list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "89f1e930-b8a1-4657-ab38-ab0361ee7014"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_DayOfMonthField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_DayOfMonth' ,  \n IF(vSC_DateType='POSTING',  'Posting_DayOfMonth', 'Create_DayOfMonth'))",
+    "description": "This variable will be used in the Day of Month list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "dcd9ad9b-b1ec-4930-817e-12e9c33a5828"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_CalendarDateField",
+    "expression": "=IF(vSC_DateType='INSERT', 'InsertCalendarDate' ,  \n IF(vSC_DateType='POSTING',  'PostingCalendarDate', 'CreateCalendarDate'))",
+    "description": "This variable will be used in the CalendarDate list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "646923a5-0a8b-4ae5-a659-0de0041dcc96"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_WeekField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_WeekOfYear' ,  \n IF(vSC_DateType='POSTING',  'Posting_WeekOfYear', 'Create_WeekOfYear'))",
+    "description": "This variable will be used in the Week list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "c87f6364-0c24-45aa-8023-6de87e602eb5"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_DayOfWeekField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_DayOfWeekText' ,  \n IF(vSC_DateType='POSTING',  'Posting_DayOfWeekText', 'Create_DayOfWeekText'))",
+    "description": "This variable will be used in the Day of Week list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "bf32a4a7-0ea3-49c1-86c5-23643a1e62f0"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_HolidayField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_HolidayName' ,  \n IF(vSC_DateType='POSTING',  'Posting_HolidayName', 'Create_HolidayName'))",
+    "description": "This variable will be used in the Holiday list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "bc3eb24e-4df6-4478-b8d1-3176d3ee49e5"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_date_FLAG_YTD",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_FLAG_YTD' ,  \n IF(vSC_DateType='POSTING',  'Posting_FLAG_YTD', 'Create_FLAG_YTD'))",
+    "description": "This variable will be used to allow users to set the YTD flag for the values in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "9b31e5fa-94e4-4088-b55d-ce159bf2f17b"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "mod_CY",
+    "expression": "$(=$(vFiscalOrCalendarYear)) = {$(=$(SelectYear))}",
+    "description": "Formula Modifier for Current Year based on the SelectYear variable and taking into account whether user has selected Fiscal Or Calendar Year\nThis variable will be used in the Formulas spreadsheet to modify existing formulas/expression.",
+    "notes": "",
+    "group": "Formula Modifiers",
+    "locked": true,
+    "id": "4d3cedb0-aa99-46ec-a498-1d10c81c08d7"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "mod_PY",
+    "expression": "$(=$(vFiscalOrCalendarYear)) = {$(=$(SelectYear)-1)}",
+    "description": "Formula Modifier for Previous Year based on the SelectYear variable and taking into account whether user has selected Fiscal Or Calendar Year\nThis variable will be used in the Formulas spreadsheet to modify existing formulas/expression.",
+    "notes": "",
+    "group": "Formula Modifiers",
+    "locked": true,
+    "id": "f3589ee8-db64-45f6-bbd8-ad07a4998ee9"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "mod_YTD",
+    "expression": "$(=Capitalize('$(vSC_DateType)') & '_FLAG_YTD')={TRUE}",
+    "description": "Formula Modifier for YTD flag.  Will only return transactions that have the YTD flag set to TRUE.  It will take into account the type of date being used by the user (Insert, Posting or Create)",
+    "notes": "",
+    "group": "Formula Modifiers",
+    "locked": true,
+    "id": "69ce3917-156a-40c6-950f-2c302d1b7e6e"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "mod_Prev_YTD",
+    "expression": "$(=Capitalize('$(vSC_DateType)') & '_FLAG_PreviousYTD')={TRUE}",
+    "description": "Formula Modifier for the Previous YTD flag.  Will only return transactions that have the Previous YTD flag set to TRUE.  It will take into account the type of date being used by the user (Insert, Posting or Create)",
+    "notes": "",
+    "group": "Formula Modifiers",
+    "locked": true,
+    "id": "ba8bd48d-0d3c-440a-ac24-b9f0611d02ed"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vinputAccrualStartDate",
+    "expression": "=Date(CURRENT_PeriodStartDate)",
+    "description": "Defines the beginning date for the report",
+    "notes": "Finance tab->Accrual/Deferral button",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "4f92368a-f9d4-4a80-9df4-e48cde48ae8c"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vinputAccrualEndDate",
+    "expression": "=Date(CURRENT_PeriodEndDate)",
+    "description": "Defines the ending date for the report",
+    "notes": "Finance tab->Accrual/Deferral button",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "848326fa-ef95-4d0f-80c8-910f0dd3aa8b"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vandProd_ProductSet",
+    "expression": "='SUM({<$(vAndProd_ProductSetAcctOrAdOrder)=' & Concat(Distinct {$} '{\"=COUNT({<ProductName={' & chr(39) & ProductName, chr(39) & '}>} AccountNumber_AdBase)>0\"}*')\n  & chr(39) & '}>} $(vAndProd_ProductSetAcctOrAdOrder))>0\"}$(vAndProd_ProductClear)>} $(NetRevenue))'",
+    "description": "",
+    "notes": "",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "07dcf4de-bb67-4e59-b3e7-6ab1bb6eb9ab"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vAndProd_ShowExpression",
+    "expression": "=IF(vAndProd_ShowExpression=1,0,1)",
+    "description": "",
+    "notes": "",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "ef96411f-9dc2-4492-9f95-5b98ce2be49d"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vAndProd_ShowHelp",
+    "expression": "=IF(vShowHelp='ANDHelp', '', 'ANDHelp')",
+    "description": "",
+    "notes": "",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "624136ba-b6bb-4910-bd6a-b78a1428bd9b"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vAndProd_ProductSetAcctOrAdOrder",
+    "expression": "AccountNumber_AdBase",
+    "description": "",
+    "notes": "",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "f73b3c84-a2e4-42fc-b770-06aa4e182410"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vAndProd_ProductClear",
+    "expression": "=null()",
+    "description": "",
+    "notes": "",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "ff9292a1-8c39-418e-aa2f-89df0bc53d31"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vChurnPrevYear",
+    "expression": "IF(IsNull(AGGR(SUM({$<$(=$(vFiscalOrCalendarYear))={$(=$(SelectYear)-1)}>} $(NetRevenue)), AccountNumber_AdBase)),0,AGGR(SUM({$<$(=$(vFiscalOrCalendarYear))={$(=$(SelectYear)-1)}>} $(NetRevenue)), AccountNumber_AdBase))",
+    "description": "AGGR function that returns revenue for customers in Previous Year",
+    "notes": "Advertising tab -> Churn",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "d28e3dfa-fd28-485f-96e1-60fa34d5d6f3"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vChurnCurrYear",
+    "expression": "IF(IsNull(AGGR(SUM({$<$(=$(vFiscalOrCalendarYear))={$(SelectYear)}>} $(NetRevenue)), AccountNumber_AdBase)),0,AGGR(SUM({$<$(=$(vFiscalOrCalendarYear))={$(SelectYear)}>} $(NetRevenue)), AccountNumber_AdBase))",
+    "description": "AGGR function that returns revenue for customers in Current Year",
+    "notes": "Advertising tab -> Churn",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "2b77ffc3-8c99-4df8-bdb2-1e91f77478b6"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vChurnType",
+    "expression": "YOY",
+    "description": "If MONTH, then show Churn by Month chart; if YOY, show YOY Churn",
+    "notes": "Advertising tab -> Churn",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "aeed84c6-a546-472b-8913-9af7726bb4c4"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vChurnDynCurrMonth",
+    "expression": "IF(IsNull(AGGR(SUM({$<$(=$(vChurnDynMonthField))={$(=NUM(Mid('$(SelectMonthYear)',5,2)))},$(=$(vFiscalOrCalendarYear))={$(=Mid('$(SelectMonthYear)',1,4))}>} $(NetRevenue)), AccountNumber_AdBase)),\n 0,\n  AGGR(SUM({$<$(=$(vChurnDynMonthField))={$(=NUM(Mid('$(SelectMonthYear)',5,2)))},$(=$(vFiscalOrCalendarYear))={$(=Mid('$(SelectMonthYear)',1,4))}>} $(NetRevenue)), AccountNumber_AdBase))",
+    "description": "Used for Monthly Churn calculations (this is the current Month formula)",
+    "notes": "",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "871c9abd-727f-4ed9-ae87-f381b9c318c0"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vChurnDynPrevMonth",
+    "expression": "IF(IsNull(AGGR(SUM({$<$(=$(vChurnDynMonthField))={$(=NUM(Mid('$(SelectMonthYearPrev)',5,2)))},$(=$(vFiscalOrCalendarYear))={$(=Mid('$(SelectMonthYearPrev)',1,4))}>} $(NetRevenue)), AccountNumber_AdBase)),\n 0,\n  AGGR(SUM({$<$(=$(vChurnDynMonthField))={$(=NUM(Mid('$(SelectMonthYearPrev)',5,2)))},$(=$(vFiscalOrCalendarYear))={$(=Mid('$(SelectMonthYearPrev)',1,4))}>} $(NetRevenue)), AccountNumber_AdBase))",
+    "description": "Used for Monthly Churn calculations (this is the previous Month formula)",
+    "notes": "Advertising tab -> Churn (Monthly Churn)",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "17bd1638-b60f-400b-b189-f415ee6a7949"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vChurnDynMonthField",
+    "expression": "Capitalize('$(vSC_DateType)') & '_MonthOfYearNumber'",
+    "description": "Dynamic field for the Month field in the monthly churn chart",
+    "notes": "Advertising tab -> Churn (Monthly Churn)",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "5ffee35f-6aa1-4cc3-9146-5b79d9c5a687"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vShowTotals",
+    "expression": 0,
+    "description": "Flag to be used when using code to show and hide totals in a pivot table.  In base version this is only in the Preprint report on the Advertising tab as an example.",
+    "notes": "",
+    "group": "Report-Variables",
+    "locked": true,
+    "id": "57dc355e-f203-4e1d-849e-6d5d6102c424"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsysCurrentSelections",
+    "expression": "=if(vsysShowCS = 1, '  Click Here To Hide', if(isnull(GetCurrentSelections()), '  Nothing selected', GetCurrentSelections(' | ', ': ', ',',0)))",
+    "description": "Used in the DisplayCurrent Selections boxes.",
+    "notes": "",
+    "group": "System-CurrentSelections",
+    "locked": true,
+    "id": "9918498b-f681-4863-9f71-40275e674ad7"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsysShowCS",
+    "expression": 0,
+    "description": "Flag to determine if we should show or hide a current selections object",
+    "notes": "",
+    "group": "System-CurrentSelections",
+    "locked": true,
+    "id": "220718f3-2c54-4b81-a87f-960d5e5779f4"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsysFormulaCreatorTemp",
+    "expression": "---",
+    "description": "A variable that will hold the formula being created by Formula Creator.",
+    "notes": "",
+    "group": "System-FormulaCreator",
+    "locked": true,
+    "id": "2f1c1002-8794-4e01-958c-02f253b90c17"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vLoadOldAcctNums",
+    "expression": 0,
+    "description": "Flag to determine if we should load old accountnumbers",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "ca1677e5-6a2f-4e02-b348-430594277538"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vReloadVariables",
+    "expression": 0,
+    "description": "Used in SOURCE_ to determine if this spreadsheet should be reloaded.  Turned on and off in the application NOT here.",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "b609bad4-ba8a-4065-ae06-f68ac7ae544c"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vLoadCRM",
+    "expression": 0,
+    "description": "Used in SOURCE_ to determine if CRM data will be loaded.  Turned on and off in the application NOT here.",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "62d8bafb-a608-4182-86e6-e23a175d377c"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vLoadPRPSchedule",
+    "expression": 0,
+    "description": "Used in SOURCE_ to determine if Preprint schedule information from Core will be loaded.  Turned on and off in the application NOT here.",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "055b3bcd-001e-4462-92f6-365d252f87dc"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vLoadBudget",
+    "expression": 0,
+    "description": "Used in SOURCE_ to determine if Budget spreadsheet information will be loaded.  Turned on and off in the application NOT here.",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "ce1cba55-f875-4e05-b35f-bb6172690604"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vLoadCustomScripts",
+    "expression": 0,
+    "description": "Used in SOURCE_ to determine if Custom Scripts should be loaded.  If true, Source file will look in CustomScripts\\SalesFlash\\*.qvs",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "b524bede-7f73-4aa1-9e8d-2e91ea4ca768"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vExcludeGLs",
+    "expression": 0,
+    "description": "Used in SOURCE_ to determine if ExcludeGLs information should be read and processed from the SystemSheet.xls -> GLExcludeList",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "803ed12b-07fe-43fe-813f-baf1fe6af165"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vLoadAdvRevenue",
+    "expression": 0,
+    "description": "Used in SOURCE_ to determine if we are to load revenue from the fctInsertSummary and Detail tables. Can increase load times significantly",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "4211e95e-26bf-4906-8044-5c0e87cce898"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vShowHelp",
+    "expression": "",
+    "description": "Used to show and hide help text boxes.",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "a5b0da76-3679-42ec-938d-3379fe7f7ebb"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsysButtonColorOn",
+    "expression": "ARGB(100,209,239,180)",
+    "description": "On sheets with a button bar down the side, this will be the color of the button selected.",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "596ccd4e-6dcf-4355-b1e2-c5d6e450e296"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsysButtonColorOff",
+    "expression": "ARGB(255,255,255,255)",
+    "description": "On sheets with a button bar down the side, this will be the color of the buttons NOT selected.",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "b5c4e298-f05d-441a-8996-7c88edee86af"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vLastActivityDate",
+    "expression": "DATE(AGGR(MAX({1} InsertCalendarDate),AccountNumber_AdBase))",
+    "description": "Return the most recent (could even be in the future depending on expression) insertion date for every customer.  \nThis expression will return the last insert date for customers and could be in the future:\n=DATE(AGGR(MAX({1} InsertCalendarDate),AccountNumber_AdBase))\nYou can also limit the dates that the expression looks for the last insertion.  The expression below will search for the last insert date before one month ago Today.\n=DATE(AGGR(MAX({1} InsertCalendarDate),AccountNumber_AdBase))",
+    "notes": "Advertising tab -> Inactive customers",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "5a6a4ca3-31eb-4740-b62c-ac258026c976"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vOSUser",
+    "expression": "=OSUser()",
+    "description": "User logged into the application.",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "ef637a82-ab71-445e-a207-d3e1a295cd07"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "SelectYear",
+    "expression": "=[YearComparison%]",
+    "description": "Used for Year over Year caclulations",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "dc6ef200-8c3d-4956-b98d-34651095c703"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vFiscalOrCalendarYear",
+    "expression": "Capitalize('$(vSC_DateType)') & '_CalendarYear'",
+    "description": "Allows the user to do YOY comparisons based on the Fiscal or Calendar Year.  Will be either Posting_CalendarYear or Insert_CalendarYear.\nSample Dimension Usage:\n=$(=$(vFiscalOrCalendarYear))\nSample Expression Usage:\nSUM( {<$(=$(vFiscalOrCalendarYear)) = {$(=$(SelectYear))}>} $(NetRevenue))",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "544f3bc6-aedd-401b-b8aa-f818acd94d1e"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vFiscalOrCalendarYearLabel",
+    "expression": "Calendar",
+    "description": "Label for the List boxes, Dimensions and Expressions that use the Dynamic Year and month/period fields",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "edf1c2da-af83-476c-8410-27a8ced49527"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vFiscalOrCalendarMonthPeriod",
+    "expression": "Capitalize('$(vSC_DateType)') & '_Month'",
+    "description": "Dynamic field that can be used in Dimensions.  This will allow the user to select whether they see Insert/posting/create and Calendar(month) or Fiscal(period).\n=$(=$(vFiscalOrCalendarMonthPeriod))",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "afc70ec3-7333-4014-88c2-af5d99c8a2e5"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vFiscalOrCalendarMonthPeriodLabel",
+    "expression": "Month",
+    "description": "Label to be used for the charts that use this Dynamic Dimension",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "347bcaac-5027-4754-8b9d-d778b6e34c02"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vFiscalOrCalendarPrevYTD",
+    "expression": "",
+    "description": "Sets the YTD Flag based on the Date settings - Controlled by YTDSwitch Macro\nCapitalize('$(vSC_DateType)') & '_FLAG_PreviousYTD'",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "b9fa3c7e-44b3-40c9-a92a-40114c6ef83a"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vFiscalOrCalendarYTD",
+    "expression": "",
+    "description": "Sets the YTD Flag based on the Date settings - Controlled by YTDSwitch Macro\nCapitalize('$(vSC_DateType)') & '_FLAG_YTD'",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "8243ee4c-77dc-4698-a431-dd0e0b577a47"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsysShowAdvancedSheets",
+    "expression": 0,
+    "description": "When true, shows the Formulas, Formula Creator and Tables and Fields sheets.",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "cbde84d6-4a86-43c5-8e09-575dc9e50415"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vbtnsFinance",
+    "expression": 1,
+    "description": "Controls which reports are showing on the Finance sheet",
+    "notes": "Finance Tab",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "37fee785-b369-481b-a5e5-9fa9d988cf2e"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vbtnsAdvertising",
+    "expression": 1,
+    "description": "Controls which reports are showing on the Advertising sheet",
+    "notes": "Advertising Tab",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "ddd9c80d-1a86-4ba1-a968-45cba41ea061"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vbtnsReference",
+    "expression": 1,
+    "description": "Controls which reports are showing on the Reference sheet",
+    "notes": "Reference Tab",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "3e0e380e-e38b-4383-beef-f498890b6ba9"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vbtnsCRM",
+    "expression": 1,
+    "description": "Controls which reports are showing on the CRM sheet",
+    "notes": "CRM Tab",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "35866971-1cb7-4264-8f4f-6525d6ed1346"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vTab",
+    "expression": "DateActive",
+    "description": "Used on Selection Criteria tab to determine which side tab is active.  \nOPTIONS: DateActive, ProductActive, SalesActive or OtherActive",
+    "notes": "Selection Criteria tab",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "7b2c57c2-dc9d-443b-834f-b1f29e42832e"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vQSTab",
+    "expression": "DateActive",
+    "description": "Used on all reporting tabs to determine which Quick Selection Ribbon tab is active. \nOPTIONS: DateActive, ProductActive, SalesActive, GLActive or OtherActive",
+    "notes": "Quick Select ribbon",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "5701f3c3-fcfc-462b-be54-b215923a83b4"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vSC_DateType",
+    "expression": "POSTING",
+    "description": "Holds either INSERT, POSTING or CREATE.  Used to dynamically change Date List boxes.",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": false,
+    "id": "d3c154e1-034b-4133-a052-3e17ddd004aa"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vFiscalOrCalendarFlag",
+    "expression": 0,
+    "description": "0=Calendar, 1=Fiscal",
+    "notes": "",
+    "group": "Dynamic Date Selection",
+    "locked": false,
+    "id": "6e10fe17-d025-4a22-b2a3-4c43d2cc0f7e"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGL_BUCKET_1",
+    "expression": "Revenue Category",
+    "description": "The Expression here will be the new field name for use in SalesFlash.qvw",
+    "notes": "",
+    "group": "GL Buckets",
+    "locked": false,
+    "id": "cdddcbee-15c2-4608-842d-7ccb6a0a4383"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGL_BUCKET_2",
+    "expression": "Revenue Product",
+    "description": "The Expression here will be the new field name for use in SalesFlash.qvw",
+    "notes": "",
+    "group": "GL Buckets",
+    "locked": false,
+    "id": "b7ce2024-6970-4d96-936f-4ea07f32b24a"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGL_BUCKET_3",
+    "expression": "vGL_BUCKET_3",
+    "description": "The Expression here will be the new field name for use in SalesFlash.qvw - You do NOT need to fill in all of these",
+    "notes": "",
+    "group": "GL Buckets",
+    "locked": false,
+    "id": "c6b22885-cdfe-481f-b4e8-ef85c2bd458e"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGL_BUCKET_4",
+    "expression": "vGL_BUCKET_4",
+    "description": "The Expression here will be the new field name for use in SalesFlash.qvw - You do NOT need to fill in all of these",
+    "notes": "",
+    "group": "GL Buckets",
+    "locked": false,
+    "id": "63a1a1b2-0e55-4541-961e-d33916d4f270"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGL_BUCKET_5",
+    "expression": "vGL_BUCKET_5",
+    "description": "The Expression here will be the new field name for use in SalesFlash.qvw - You do NOT need to fill in all of these",
+    "notes": "",
+    "group": "GL Buckets",
+    "locked": false,
+    "id": "f94cb922-a23d-4abc-a0a8-c9cb8e2d01a7"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGL_BUCKET_6",
+    "expression": "vGL_BUCKET_6",
+    "description": "The Expression here will be the new field name for use in SalesFlash.qvw - You do NOT need to fill in all of these",
+    "notes": "",
+    "group": "GL Buckets",
+    "locked": false,
+    "id": "1efd8f46-af7d-4a19-8466-4f93fbd9f33f"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vinputTopNNN",
+    "expression": 25,
+    "description": "User entered, number of top/bottom performers to show.",
+    "notes": "Advertising tab -> Winners/Losers button",
+    "group": "InputBox",
+    "locked": false,
+    "id": "443342e3-c10d-4262-b970-d3bbeb513af1"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vInactiveDays",
+    "expression": 30,
+    "description": "Used along with the vLastActivityDate to determine if a customer should be returned on the \"inactive customer\" report.  This will be the initial number of Inactive Days shown.",
+    "notes": "Advertising tab -> Inactive customers",
+    "group": "InputBox",
+    "locked": false,
+    "id": "fcbd4c4d-9b9e-4b8f-9499-0effe21298de"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsheet_Finance",
+    "expression": 1,
+    "description": "1 = Show Sheet; 0 = Hide Sheet",
+    "notes": "",
+    "group": "Sheet Visability",
+    "locked": false,
+    "id": "d3c723b5-2613-4a3a-b852-fc01614a9420"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsheet_Advertising",
+    "expression": 1,
+    "description": "1 = Show Sheet; 0 = Hide Sheet",
+    "notes": "",
+    "group": "Sheet Visability",
+    "locked": false,
+    "id": "488a6909-c744-4b53-926e-88e353a4a9ea"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsheet_RevCompare",
+    "expression": 1,
+    "description": "1 = Show Sheet; 0 = Hide Sheet",
+    "notes": "",
+    "group": "Sheet Visability",
+    "locked": false,
+    "id": "d767ee09-2f64-4bb5-9538-7b76d54b1b17"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vsheet_Budget",
+    "expression": 1,
+    "description": "1 = Show Sheet; 0 = Hide Sheet",
+    "notes": "",
+    "group": "Sheet Visability",
+    "locked": false,
+    "id": "c11de937-3d40-40a0-aa78-93440dd8b5e7"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vShowAdvancedSheets",
+    "expression": 0,
+    "description": "Shows/hides Reference Charts, Tables & Fields, Formulas, Formula Creator tabs",
+    "notes": "Main tab",
+    "group": "Sheet Visability",
+    "locked": false,
+    "id": "2d3d8f7e-7051-4315-9412-de1f5f2e4916"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vDaysInPreviousYear",
+    "expression": "Date((Today())-(MakeDate(Year(Today())-1,12,31)-MakeDate(Year(Today())-1,1)))",
+    "description": "Returns the number of days in the CurrentYear -1 (Previous Year)",
+    "notes": "",
+    "group": "Report-Variables",
+    "locked": false,
+    "id": "c2ddc1fd-2821-471c-998c-5e70e7ae825c"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGaugeFillToSegment1",
+    "expression": "RGB(110,175,75)",
+    "description": "First segment of Gauge from Zero to Lower bound of Segment2.",
+    "notes": "Gauges",
+    "group": "System-Colors",
+    "locked": false,
+    "id": "ab1e3868-2975-48bc-a121-a6500f32e234"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGaugeFillToSegment2",
+    "expression": "RGB(191,191,191)",
+    "description": "Second segment of Gauge from Lower bound of Segment2 to end.",
+    "notes": "Gauges",
+    "group": "System-Colors",
+    "locked": false,
+    "id": "4c527fe6-4e0d-44be-8e9a-4475bd047a30"
+  },
+  {
+    "application": "SALESFLASH",
+    "name": "vGaugeFillToOverSegment",
+    "expression": "RGB(80,130,50)",
+    "description": "This is the color of the whole gauge if the expression exceeds the bounds.  If gauge is from 0 to 100 and we have 142, this color would show.",
+    "notes": "Gauges",
+    "group": "System-Colors",
+    "locked": false,
+    "id": "8fba33ca-b239-4389-9926-6b2b86b834ef"
+  },
+  {
+    "application": "COMMON",
+    "name": "vsysButtonColorOn",
+    "expression": "ARGB(100,209,239,180)",
+    "description": "On sheets with a button bar down the side, this will be the color of the button selected.",
+    "group": "System",
+    "notes": "",
+    "locked": true,
+    "id": "36edeca2-998b-49fe-8196-587f9ec3e377"
+  },
+  {
+    "application": "COMMON",
+    "name": "vsysButtonColorOff",
+    "expression": "ARGB(100,209,239,180)",
+    "description": "On sheets with a button bar down the side, this will be the color of the button NOT selected.",
+    "group": "System",
+    "notes": "",
+    "locked": true,
+    "id": "0b92179f-f427-4305-843a-69d6b9b55d61"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_CalendarYearField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_CalendarYear' ,  \n IF(vSC_DateType='POSTING',  'Posting_CalendarYear', 'Create_CalendarYear'))",
+    "description": "This variable will be used in the CalendarYear list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "27069607-2f2e-4a6d-bb88-f9aa4a1f726c"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_FiscalYearField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_FiscalYear' ,  \n IF(vSC_DateType='POSTING',  'Posting_FiscalYear', 'Create_FiscalYear'))",
+    "description": "This variable will be used in the Fiscal Year list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "13aa60f2-8a7a-4c5a-9360-3c4d9c9d4a5f"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_QuarterField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_QuarterCalendarText' ,  \n IF(vSC_DateType='POSTING',  'Posting_QuarterCalendarText', 'Create_QuarterCalendarText'))",
+    "description": "This variable will be used in the Quarter list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "b6fab02b-4a68-47d4-a4ce-83b9da08e6f4"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_PeriodField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_PeriodOfYearNumber' ,  \n IF(vSC_DateType='POSTING',  'Posting_PeriodOfYearNumber', 'Create_PeriodOfYearNumber'))",
+    "description": "This variable will be used in the Period list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "eb5f2320-3766-45d5-8107-6fb6b06c5912"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_MonthField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_Month' ,  \n IF(vSC_DateType='POSTING',  'Posting_Month', 'Create_Month'))",
+    "description": "This variable will be used in the Month list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "833fa630-f608-4d52-b48a-b46165232e7e"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_DayOfMonthField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_DayOfMonth' ,  \n IF(vSC_DateType='POSTING',  'Posting_DayOfMonth', 'Create_DayOfMonth'))",
+    "description": "This variable will be used in the Day of Month list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "9efefbaf-5afb-4849-a4e5-3f437bd3269e"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_CalendarDateField",
+    "expression": "=IF(vSC_DateType='INSERT', 'InsertCalendarDate' ,  \n IF(vSC_DateType='POSTING',  'PostingCalendarDate', 'CreateCalendarDate'))",
+    "description": "This variable will be used in the CalendarDate list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "b9d53c69-536f-4e6d-a153-d6f585f1a0c9"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_WeekField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_WeekOfYear' ,  \n IF(vSC_DateType='POSTING',  'Posting_WeekOfYear', 'Create_WeekOfYear'))",
+    "description": "This variable will be used in the Week list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "87498e76-24f2-4684-992e-39ccfb3e3275"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_DayOfWeekField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_DayOfWeekText' ,  \n IF(vSC_DateType='POSTING',  'Posting_DayOfWeekText', 'Create_DayOfWeekText'))",
+    "description": "This variable will be used in the Day of Week list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "374d5055-e83f-4db5-8421-b8d75b8269a9"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_date_HolidayField",
+    "expression": "=IF(vSC_DateType='INSERT', 'Insert_HolidayName' ,  \n IF(vSC_DateType='POSTING',  'Posting_HolidayName', 'Create_HolidayName'))",
+    "description": "This variable will be used in the Holiday list box and will change the field based on the value in the vSC_DateType field",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": true,
+    "id": "84eff02e-7f09-42e5-a1ff-752c1f47a2b0"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vsysCurrentSelections",
+    "expression": "=if(vsysShowCS = 1, '  Click Here To Hide', if(isnull(GetCurrentSelections()), '  Nothing selected', GetCurrentSelections(' | ', ': ', ',',0)))",
+    "description": "Used in the DisplayCurrent Selections boxes.",
+    "notes": "",
+    "group": "System-CurrentSelections",
+    "locked": true,
+    "id": "92c11960-3dac-486f-bab7-111f64d28d81"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vsysShowCS",
+    "expression": 0,
+    "description": "Flag to determine if we should show or hide a current selections object",
+    "notes": "",
+    "group": "System-CurrentSelections",
+    "locked": true,
+    "id": "53d94856-88fe-4f03-b609-1d6ae34e4aca"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vsysFormulaCreatorTemp",
+    "expression": "---",
+    "description": "A variable that will hold the formula being created by Formula Creator.",
+    "notes": "",
+    "group": "System-FormulaCreator",
+    "locked": true,
+    "id": "d17d9c33-3e7b-42ed-b92c-ceabfc50f459"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vReloadVariables",
+    "expression": 0,
+    "description": "",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "4cea5ad5-1b58-4014-a5b4-fe5ceceb9f01"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vLoadCRM",
+    "expression": 0,
+    "description": "",
+    "notes": "",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "c6a24325-1c78-447a-8ca1-6ed17bc891a1"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vLoadOldAcctNums",
+    "expression": 0,
+    "description": "",
+    "notes": "",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "3ab2a973-0ab4-4fda-89aa-e369049691e6"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vLoadPRS",
+    "expression": 0,
+    "description": "",
+    "notes": "",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "77dba11d-e14b-41bf-a491-99fd1b512bcf"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vLoadCustomScripts",
+    "expression": 0,
+    "description": "Used in SOURCE_ to determine if Custom Scripts should be loaded.  If true, Source file will look in CustomScripts\\ADVERTISINGANALYTIX\\*.qvs",
+    "notes": "Main tab",
+    "group": "System-Load Switches",
+    "locked": true,
+    "id": "010e9dce-4ba3-49a8-8a1f-e0aa36cdc3aa"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vShowHelp",
+    "expression": "",
+    "description": "",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "a8ca0e91-5bed-4864-8f48-b9b3b2642666"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "SelectYear",
+    "expression": "=[YearComparison%]",
+    "description": "Used for Year over Year caclulations",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "56717f3c-7ebc-4241-aa35-ece7f1f33aa6"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vFiscalOrCalendarYear",
+    "expression": "Capitalize('$(vSC_DateType)') & '_CalendarYear'",
+    "description": "Allows the user to do YOY comparisons based on the Fiscal or Calendar Year.  Will be either Posting_CalendarYear or Insert_CalendarYear.\nSample Dimension Usage:\n=$(=$(vFiscalOrCalendarYear))\nSample Expression Usage:\nSUM( {<$(=$(vFiscalOrCalendarYear)) = {$(=$(SelectYear))}>} $(NetRevenue))",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "ee51fafb-c086-45cd-920b-7af382335b0d"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vFiscalOrCalendarYearLabel",
+    "expression": "Calendar",
+    "description": "Label for the List boxes, Dimensions and Expressions that use the Dynamic Year and month/period fields",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "a7b3b50e-dbeb-4a08-884e-adb66c9ef069"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vFiscalOrCalendarMonthPeriod",
+    "expression": "Capitalize('$(vSC_DateType)') & '_Month'",
+    "description": "Dynamic field that can be used in Dimensions.  This will allow the user to select whether they see Insert/posting/create and Calendar(month) or Fiscal(period).\n=$(=$(vFiscalOrCalendarMonthPeriod))",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "98b5286c-097a-4378-bce8-f4d4b5107804"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vFiscalOrCalendarMonthPeriodLabel",
+    "expression": "Month",
+    "description": "Label to be used for the charts that use this Dynamic Dimension",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "38819aec-3dee-401d-97ad-66c9d880f4b8"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vFiscalOrCalendarYTD",
+    "expression": "",
+    "description": "Sets the YTD Flag based on the Date settings - Controlled by YTDSwitch Macro\nCapitalize('$(vSC_DateType)') & '_FLAG_YTD'",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "b671689d-b7f7-4543-8509-91a0259ed5b9"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vsysButtonColorOn",
+    "expression": "ARGB(100,209,239,180)",
+    "description": "On sheets with a button bar down the side, this will be the color of the button selected.",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "7b7e8ef2-604a-48eb-af30-56069a37712c"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vsysButtonColorOff",
+    "expression": "ARGB(255,255,255,255)",
+    "description": "On sheets with a button bar down the side, this will be the color of the buttons NOT selected.",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": true,
+    "id": "59a7f714-5557-434b-b40f-273a58f82271"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vTab",
+    "expression": "DateActive",
+    "description": "",
+    "notes": "Selection Criteria tab",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "6d41c892-08b9-45dd-9583-4b0e4df65d95"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vQSTab",
+    "expression": "DateActive",
+    "description": "",
+    "notes": "Quick Select ribbon",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "274aa1ae-2ba4-4b7d-8100-5c6cb4e51359"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vbtnsOrderInfo",
+    "expression": 1,
+    "description": "Controls which reports are showing on the Order Information tab",
+    "notes": "",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "24feb588-25b1-4529-865d-d71c66f0679d"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vbtnsReference",
+    "expression": 1,
+    "description": "Controls which reports are showing on the Reference sheet",
+    "notes": "",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "5f491a18-d98c-4804-adf2-63aade02b344"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vbtnsMiscReports",
+    "expression": 1,
+    "description": "Controls which reports are showing on the Misc Reports sheet",
+    "notes": "",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "64a91005-6620-43fe-8164-aa87ce90cd84"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vbtnsReference",
+    "expression": 1,
+    "description": "Controls which reports are showing on the Reference sheet",
+    "notes": "",
+    "group": "Button Lists",
+    "locked": false,
+    "id": "7528fa95-862f-4441-a0e8-4ebb3e63a0ce"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vSC_DateType",
+    "expression": "INSERT",
+    "description": "Holds either INSERT, POSTING or CREATE.  Used to dynamically change Date List boxes.",
+    "notes": "Selection Criteria Tab",
+    "group": "Dynamic Date Selection",
+    "locked": false,
+    "id": "25e193d9-686c-4037-a4c4-cdf923246db3"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vFiscalOrCalendarFlag",
+    "expression": 0,
+    "description": "0=Calendar, 1=Fiscal",
+    "notes": "",
+    "group": "Dynamic Date Selection",
+    "locked": false,
+    "id": "68c3aa93-c042-4323-9c19-425841529a9b"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vShowAdvancedSheets",
+    "expression": 0,
+    "description": "Shows/hides Reference Charts, Tables & Fields, Formulas, Formula Creator tabs",
+    "notes": "Main tab",
+    "group": "Sheet Visability",
+    "locked": false,
+    "id": "0099944d-a92d-4d7c-ab17-a21b1324c996"
+  },
+  {
+    "application": "ADVERTISINGANALYTIX",
+    "name": "vOSUser",
+    "expression": "=OSUser()",
+    "description": "",
+    "notes": "",
+    "group": "System-Variables",
+    "locked": false,
+    "id": "2f13ad9f-ad8a-4f8b-838a-0acde508c9b5"
+  },
+  {
+    "id": "69ef297d-f36f-4c97-bfc3-ff1c6f817ab1",
+    "application": "SALESFLASH",
+    "name": "vSampleVariableName",
+    "expression": "Sample Expression",
+    "description": "Sample Desc",
+    "notes": "Sample Notes",
+    "group": "Dynamic Date Selection",
+    "locked": true
+  },
+  {
+    "id": "9a4e0b6d-00f6-43ce-bb19-3d7fbf06c3ea",
+    "application": "SALESFLASH",
+    "name": "vSampleVariableName",
+    "expression": "Sample Expression",
+    "description": "Sample Desc",
+    "notes": "Sample Notes",
+    "group": "Dynamic Date Selection",
+    "locked": true
+  },
+  {
+    "id": "4611e6d7-4a94-4f68-a034-5e707aaaccab",
+    "application": "SALESFLASH",
+    "name": "Updated!!",
+    "expression": "Sample Expression",
+    "description": "Sample Desc",
+    "notes": "Sample Notes",
+    "group": "Dynamic Date Selection",
+    "locked": false
+  }
+]
