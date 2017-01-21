@@ -51,7 +51,6 @@ app.get('/api/variables/app', (req, res) => {
 //--specific application as a javascript object.
 //---------------------------------------------------
 app.get('/api/variables/app/:appName', (req, res) => {
-	console.log('server', req.params.appName);
   fs.readFile(DATA_FILE, (err, data) => {
     let qvVars = JSON.parse(data);
     let appName = req.params.appName.toLowerCase();
@@ -78,7 +77,7 @@ app.post('/api/variables', (req, res) => {
 			name: req.body.name,
 			expression: req.body.expression,
 			description: req.body.description,
-			notes: req.body.notes,
+			notes: req.body.notes || '',
 			group: req.body.group,
 			locked: req.body.locked
 		};

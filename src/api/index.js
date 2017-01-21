@@ -25,16 +25,19 @@ export default {
 			.then(response => response.data);
 	},
 	updateQlikVariable: varToUpdate => {
-		axios.put('/api/variables', varToUpdate)
+		return axios.put('/api/variables', varToUpdate)
 			.then(response => {
-				console.log(response);
+				if (response.status === 200 && response.statusText === 'OK') {
+					return 'Variable updated Successfully';
+				}
+				return response;
 			})
 			.catch(error => {
 				console.log(`Error updating Qlik Variable id: ${varToUpdate.id} - ${error}`);
 			})
 	},
 	deleteQlikVariable: idToDelete => {
-		axios.delete(`api/variables/${idToDelete}`)
+		return axios.delete(`api/variables/${idToDelete}`)
 			.then(response => {
 				console.log('QV Variable Deleted');
 			})

@@ -6,26 +6,17 @@ import { startLoadApplicationVars } from '../actions/actions';
 
 
 class QVAppList extends React.Component {
-	state = {
-		appList: [],
-		appSelected: ''
-	}
 
-	// componentDidMount() {
-	// 	//Get list of Applications in the QVVariables.json file on server
-	// 	api.getApplicationNames()
-	// 		.then(data => this.setState({appList: data}));
-	// }
 	render() {
 		return (
 			<div>
 				{this.props.applicationList.map(app => {
 					return (
-						<div>
-							<a key={app} onClick={() => this.props.startLoadApplicationVars(app)}>{app} </a>
-						</div>
+							<li key={app} style={{display: 'inline-block', width:'100%'}}>
+								<a onClick={() => this.props.startLoadApplicationVars(app)}>{app} </a>
+							</li>
 					);
-			})}
+				})}
 			</div>
 		);
 	}

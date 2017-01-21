@@ -1,9 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose, reduxMiddleware } from 'redux';
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
 
 import { qvVariableReducer } from '../reducers/qvVariableReducer';
-import { applicationListReducer } from '../reducers/applicationListReducer';
+import { applicationsReducer } from '../reducers/applicationsReducer';
+import { appStateReducer } from '../reducers/appStateReducer';
 
 //Import reducers..
 //import { newShowsInfoReducer } from '../reducers/newShowsInfoReducer';
@@ -14,8 +16,15 @@ import freeze from 'redux-freeze';
 
 //Setup the initil redux state
 const INITIAL_STATE = {
-			applicationList: [],
-			qvVariables: []
+			applications: {
+				applicationList: [],
+				selectedApplication: ''
+			},
+			qvVariables: [],
+			appState: {
+				selectedGroup: '',
+				searchText: ''
+			}
 		};
 //--------------------------------------------
 //-Create Store - This is called from app.js
@@ -23,8 +32,10 @@ const INITIAL_STATE = {
 export var configure = (initialState = INITIAL_STATE) => {
 //define which pieces of state are handled by which reducer
 	var reducer = combineReducers({
-			applicationList: applicationListReducer,
-			qvVariables: qvVariableReducer
+			applications: applicationsReducer,
+			qvVariables: qvVariableReducer,
+			appState: appStateReducer,
+			form: formReducer
 	});
 //Create the store that will be returned.
 	var store = createStore(reducer, initialState, compose(applyMiddleware(promise, thunk, freeze),
@@ -46,4 +57,3 @@ export var configure = (initialState = INITIAL_STATE) => {
 //     DevTools.instrument()
 //   )
 // )
-

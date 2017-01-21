@@ -42,6 +42,9 @@ $(document).foundation();
 //app css - there is an alias in webpack config pointing to app.css called applicationStyles
 require('style!css!sass!applicationStyles');
 
+//--Ant Design css load
+require('style!css!antd/dist/antd.min.css');
+
 //path="/" designates the root of the application
 ReactDOM.render(
 	<Provider store={store}>

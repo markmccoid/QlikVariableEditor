@@ -10,11 +10,11 @@ constructor(props) {
 }
 	render() {
 		return (
-			<div className="row">
-				<div className="columns small-12">
+			<div >
+
 					<Navbar />
 					{this.props.children}
-				</div>
+
 			</div>
 		);
 	}
