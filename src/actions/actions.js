@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../api';
+import * as api from '../api';
 
 //Initialization Actions
 //export const INITIALIZE_STORE = 'INITIALIZE_STORE';
@@ -96,6 +96,10 @@ export const startDeleteApplicationVar = qvVarId => {
 
 //AppState Action
 export const updateSelectedGroup = selectedGroup => {
+	//If selectedGroup is blank, the reset group to All
+	if (selectedGroup === '') {
+		selectedGroup = 'All';
+	}
 	return {
 		type: UPDATE_GROUP_VALUE,
 		selectedGroup

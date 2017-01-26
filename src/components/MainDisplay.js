@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import QVAppList from './QVAppList';
 import QVVarsDisplay from './QVVarsDisplay';
-import api from '../api';
+import * as api from '../api';
 
 class MainDisplay extends React.Component {
 	constructor(props) {

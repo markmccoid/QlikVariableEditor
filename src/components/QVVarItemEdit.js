@@ -62,13 +62,16 @@ class QVVarItemEdit extends React.Component {
 	render() {
 		const { id, name, description, expression, notes, locked } = this.props.qvVar;
 		const { handleSubmit, invalid, submitting } = this.props;
+		//Need to create a list of groups without the "All"
+		let groupListNoAll = this.props.groupList.slice(1);
+		//groupListNoAll.shift();
 
-		//function to save updated form to server
+		//function to save form data to server
 		const saveToServer = data => {
 			let saveObj = {
 				id,
 				application: this.props.qvVar.application,
-				group: this.props.qvVar.group,
+				group: data.group,
 				name: data.name,
 				expression: data.expression,
 				description: data.description,
@@ -86,7 +89,7 @@ class QVVarItemEdit extends React.Component {
 						<Field name="name" component={this.renderField} type="text" placeholder="Name" />
 					</div>
 					<div className="column small-6">
-							<Field name="group" component={this.renderDropDown} type="select" placeholder="Group" data={this.props.groupList} />
+							<Field name="group" component={this.renderDropDown} type="select" placeholder="Group" data={groupListNoAll} />
 					</div>
 					<div className="column small-12">
 						<Field name="description" component={this.renderField} type="text" placeholder="Description"/>

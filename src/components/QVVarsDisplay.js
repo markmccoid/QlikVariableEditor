@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Icon } from 'antd';
 
 import QVVarItem from './QVVarItem';
 import QVGroupSelect from './QVGroupSelect';
@@ -16,41 +17,43 @@ import { updateSelectedGroup,
 					updateSearchText } from '../actions/actions';
 
 //QV Variable manipulation functions
-import qvVarHandling from '../api/qvVarHandling';
+import { createGroupList, filterVars } from '../api';
 
 class QVVarsDisplay extends React.Component {
 
-	onGroupChanged = (selectedGroup) => {
+	handleGroupChanged = (selectedGroup) => {
 		this.props.dispatch(updateSelectedGroup(selectedGroup));
 	}
 
 	renderGroupSelect() {
 		let qvVars = [...this.props.qvVariables];
-		let groupList = qvVarHandling.createGroupList(qvVars);
+		let groupList = createGroupList(qvVars);
 		return (
 			<QVGroupSelect
 				groupList={groupList}
 				selectedGroup={this.props.appState.selectedGroup}
 				selectedApplication={this.props.applications.selectedApplication}
-				onGroupChanged={this.onGroupChanged}
+				onGroupChanged={this.handleGroupChanged}
 			/>
 		)
 	}
 	renderQVVariables() {
 		let { appState, qvVariables } = this.props;
 		//Get an array of var objects based on the Group selected (could be all variables)
-		let filterVars = qvVarHandling.filterVars(qvVariables, appState.searchText, appState.selectedGroup || 'All');
+		let filteredVars = filterVars(qvVariables, appState.searchText, appState.selectedGroup || 'All');
 		//Get an array of distinct groups in the full qvVars array (for specific applciation that was selected)
-		let groupList = qvVarHandling.createGroupList([...this.props.qvVariables]);
-		//Get a list of groups matching what is in filterVars (i.e. if someone selected a group, we only want to have the group in our groupList)
+		let groupList = createGroupList([...this.props.qvVariables]);
+		//Get a list of groups matching what is in filteredVars (i.e. if someone selected a group, we only want to have the group in our groupList)
 		let finalGroupList = groupList.filter(group =>
-			filterVars.filter(qvVar => group === qvVar.group).length > 0
+			filteredVars.filter(qvVar => group === qvVar.group).length > 0
 		);
 		//Loop through the groupList and display a header for each group that has
 		//vars in the filterVars array and display the vars.
 		return finalGroupList.map(group => {
-			let groupTitle = <div key={group} className="column small-12 group-title">{group}</div>;
-			let groupVars = filterVars.filter(qvVar => qvVar.group === group)
+			// let groupTitle = <div key={group} className="column small-12 group-title">
+			// 		<a onClick={() => this.handleGroupChanged(group)}>{group}</a>
+			// 	</div>;
+			let groupVars = filteredVars.filter(qvVar => qvVar.group === group)
 				.map(qvVar => {
 					//If the qvVar is the selectedVariableId from redux store
 					//then check if we are editing
@@ -99,9 +102,10 @@ class QVVarsDisplay extends React.Component {
 											onSelectVar={id => this.props.dispatch(updateSelectedVariable(id))}
 										/>);
 					});
+
 					//QVGroupDisplay is a simple contianer that shows the children (group titles and QVVarItems)
-					return <QVGroupDisplay key={group}>
-							{ [groupTitle, ...groupVars] }
+					return <QVGroupDisplay key={group} onGroupChanged={this.handleGroupChanged} group={group} selectedGroup={appState.selectedGroup}>
+							{ groupVars }
 						</QVGroupDisplay>;
 		});
 	}
@@ -119,19 +123,24 @@ class QVVarsDisplay extends React.Component {
 						{this.renderGroupSelect()}
 					</div>
 
-					<div className="column small-5">
+					<div className="column small-6">
 						<input
 								type="text"
 								placeholder="Search"
 								value={this.props.appState.searchText}
 								onChange={(e) => this.props.dispatch(updateSearchText(e.target.value))}
+								style={{display:"inline-block",width:"80%"}}
 						/>
-					</div>
-					<div className="column small-1 align-middle">
-						<button type="button" className="button"
-							onClick={() => this.props.dispatch(updateSearchText(''))}
+
+					<button type="button" className="hollow button small"
+							onClick={() => {
+									this.props.dispatch(updateSearchText(''));
+									this.props.dispatch(updateSelectedGroup(''));
+								}
+							}
+							style={{verticalAlign:"-webkit-baseline-middle"}}
 						>
-							Clear
+							<Icon type="close" />
 						</button>
 					</div>
 

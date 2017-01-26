@@ -4,10 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const uuid = require('node-uuid');
 const _ = require('lodash');
-
 const app = express();
+const X2JS = require('x2js'); //npm module to convert js object to XML
 
 const DATA_FILE = path.join(__dirname, 'qvvariables.json');
+
+
 
 app.set('port', (process.env.PORT || 3000));
 
@@ -49,16 +51,31 @@ app.get('/api/variables/app', (req, res) => {
 //--A GET to api/variables/:application will return an
 //--array containing only the qvvariable objects for that
 //--specific application as a javascript object.
+//--Also expecting a querystring/url-encoded data
+//--"?format=xml" OR "?format=json" defualt is json.
 //---------------------------------------------------
 app.get('/api/variables/app/:appName', (req, res) => {
+
   fs.readFile(DATA_FILE, (err, data) => {
-    let qvVars = JSON.parse(data);
+    let qvVars = JSON.parse(data); //convert json to js object
     let appName = req.params.appName.toLowerCase();
+		let appNameSansSpaces = appName.replace(/\s+/g, '');
     let applicationVars = qvVars.filter(qvVar => qvVar.application.toLowerCase() === appName);
+		//If requesting XML, get XML Data.
+		if (req.query.format === 'xml') {
+			const x2js = new X2JS();
+			let xmlString = x2js.js2xml({variable: applicationVars});
+			applicationVars = `<${appNameSansSpaces}>${xmlString}</${appNameSansSpaces}>`;
+			//write the variables array back to disk
+			fs.writeFile(path.join(__dirname, `${appName}.xml`), applicationVars, () => {
+				console.log(`file written: ${appName}.xml`);
+			});
+		}
     res.setHeader('Cache-Control', 'no-cache');
     res.send(applicationVars);
   });
 });
+
 
 //---------------------------------------------------
 //--A POST to api/variables will cause the object sent

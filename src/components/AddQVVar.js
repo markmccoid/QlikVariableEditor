@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, destroy } from 'redux-form';
 
 import { startLoadApplicationVars } from '../actions/actions';
-import qvVarHandling from '../api/qvVarHandling';
-import api from '../api';
+import { createGroupList, addQlikVariable, getApplicationVariables } from '../api';
 
 //Validation function that redux forms will use to validate input
 const validate = values => {
@@ -58,10 +57,13 @@ const validate = values => {
 		return (
 			<div>
 				<label style={{height:"28px"}}>{props.placeholder}:</label>
-				<select {...props.input} onChange={(e) => {
+				<select {...props.input}
+					onChange={(e) => {
 						props.myOnChange(e);
 						props.input.onChange(e);
-					}}>
+					}}
+					value={props.currApplication}
+					>
 					{props.data.map(item => <option key={item} value={item}>{item}</option>)}
 				</select>
 			</div>
@@ -75,22 +77,25 @@ class AddQVVar extends React.Component {
 	};
 
 	saveToServer(data) {
-		console.log(data);
-		api.addQlikVariable(data)
+		addQlikVariable(data)
 			.then(resp => {
 				this.setState({
-					currApplication: '',
+					currApplication: 'Select an Application...',
 					groupList: []
 				});
 				destroy({form: "qvAddVar"});
 			});
 	}
-	onClearForm(e) {
-		console.log('clear form');
+	onClearForm() {
+		this.setState({
+			currApplication: 'Select an Application...',
+			groupList: []
+		});
+		destroy({form: "qvAddVar"});
 	}
 	render() {
-	  const { handleSubmit, invalid, submitting, qvAddVar } = this.props;
-
+	  const { handleSubmit, invalid, submitting } = this.props;
+		const noSpaces = value => value.replace(/ /g,'');
 		let formNextFields = '';
 		if (this.state.currApplication !== '' && this.state.currApplication !== 'Select an Application...') {
 			formNextFields =
@@ -99,7 +104,7 @@ class AddQVVar extends React.Component {
 							<Field name="group" component={renderDropDown} type="select" placeholder="Group" data={this.state.groupList} />
 					</div>
 					<div className="column small-6">
-						<Field name="name" component={renderField} type="text" placeholder="Name" />
+						<Field name="name" component={renderField} type="text" placeholder="Name(no spaces)" normalize={noSpaces}/>
 					</div>
 					<div className="column small-12">
 						<Field name="description" component={renderField} type="text" placeholder="Description"/>
@@ -120,7 +125,7 @@ class AddQVVar extends React.Component {
 								style={{marginRight:"5px"}}
 								disabled={invalid || submitting}
 						>Save</button>
-					<button className="button small" onClick={(e) => this.onClearForm(e)}>Clear</button>
+					<button className="button small" onClick={() => this.onClearForm()}>Clear</button>
 					</div>
 				</div>;
 		}
@@ -135,12 +140,20 @@ class AddQVVar extends React.Component {
 										component={renderDropDownWOnChange} type="select"
 										placeholder="Application"
 										myOnChange={(e) => {
-												console.log(e.target.value);
-												this.setState({currApplication: e.target.value});
-												api.getApplicationVariables(e.target.value)
-													.then(data => this.setState({groupList: qvVarHandling.createGroupList(data).slice(1)}));
-											}}
-										data={['Select an Application...', ...this.props.applicationList]} />
+												let currApplication = e.target.value
+												//Get the Variables for the selected application and create a grouplist from it
+												//We slice off the first group because it will be the default 'All' group.
+												getApplicationVariables(e.target.value)
+													.then(data => this.setState({
+															groupList: createGroupList(data).slice(1),
+															currApplication
+														})
+													);
+											}
+										}
+										data={['Select an Application...', ...this.props.applicationList]}
+										currApplication={this.state.currApplication}
+									/>
 							</div>
 							{formNextFields}
 						</form>
@@ -158,7 +171,6 @@ AddQVVar = reduxForm({
 const mapStateToProps = (state) => {
 	return {
 		applicationList: state.applications.applicationList,
-		qvAddVar: state.form.qvAddVar,
 		initialValues: {application: 'Select an Application...', locked: false}
 	};
 };

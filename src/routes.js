@@ -4,8 +4,8 @@ import { Route, IndexRoute } from 'react-router';
 import Main from 'Main';
 import MainDisplay from 'MainDisplay';
 import Login from 'Login';
-import AddQVVar from './components/AddQVVar';
-
+import AddQVVarContainer from './components/AddQVVarContainer';
+import ExportContainer from './components/ExportContainer';
 //--React Router middleware below.
 //--Can use these functions to check if a user is logged in and only take him to specified route if logged in.
 //--To use the below you will need to do the following on a Route
@@ -39,6 +39,7 @@ export default (
 	<Route path="/" component={Main}>
 		<IndexRoute component={Login}/>
 		<Route path="main" component={MainDisplay} />
-		<Route path="addqvvar" component={AddQVVar} />
+		<Route path="addqvvar" component={AddQVVarContainer} />
+		<Route path="export" component={ExportContainer} />
 	</Route>
 );

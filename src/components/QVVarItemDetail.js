@@ -3,7 +3,6 @@ import { Icon } from 'antd';
 var alertify = require('alertifyjs');
 
 const QVVarItemDetail = (props) => {
-  console.log('qvVarItemDetail Propr', props.qvVar);
   const { id, name, description, expression, notes, locked } = props.qvVar;
 	const handleDeleteVar = () => {
 		alertify.confirm('', `Confirm Deletion of ${name}:${id} variable`,
