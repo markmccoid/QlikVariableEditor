@@ -23,7 +23,8 @@ const INITIAL_STATE = {
 			qvVariables: [],
 			appState: {
 				selectedGroup: '',
-				searchText: ''
+				searchText: '',
+				hideLocked: false
 			}
 		};
 //--------------------------------------------

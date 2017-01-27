@@ -1,9 +1,10 @@
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-export const filterVars = function(varData, searchText, groupSelected) {
+export const filterVars = function(varData, searchText, groupSelected, hideLocked = false) {
 	//-------------------
 	//- varData :
 	//- searchText :
 	//- groupSelected :
+	//- hideLocked : filter out any field that is marked as locked.
 	//-------------------
 
 	//Handle groupSelected Change
@@ -17,6 +18,10 @@ export const filterVars = function(varData, searchText, groupSelected) {
 			}
 	});
 
+	//Handle hideLocked flag
+	if (hideLocked) {
+		filteredVarData = filteredVarData.filter(item => !item.locked);
+	}
 	//Handle search string searching
 	if (searchText.length > 0) {
 		//This function makes sure that any regex special chars are escaped.

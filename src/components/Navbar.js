@@ -13,7 +13,6 @@ const Navbar = (props) => {
 						  <li><Link to="/main" >Home</Link></li>
 							<li><Link to="/addqvvar" >Add New Variable</Link></li>
 							<li><Link to="/export" >Export</Link></li>
-						  <li><Link to="/" >Login Mock</Link></li>
 						</ul>
 					</div>
 					<div className="top-bar-right">

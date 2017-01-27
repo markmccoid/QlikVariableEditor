@@ -10,12 +10,14 @@ class QVGroupSelect extends React.Component {
 			return (output);
 		});
 		return (
-				<select
-					onChange={(e) => this.props.onGroupChanged(e.target.value)}
-					value={this.props.selectedGroup}
-				>
-					{groupsOptionHTML}
-				</select>
+				<label> Group List
+					<select
+						onChange={(e) => this.props.onGroupChanged(e.target.value)}
+						value={this.props.selectedGroup}
+					>
+						{groupsOptionHTML}
+					</select>
+				</label>
 			);
 	}
 

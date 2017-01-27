@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Icon } from 'antd';
+import { Icon, Checkbox } from 'antd';
 
 import QVVarItem from './QVVarItem';
 import QVGroupSelect from './QVGroupSelect';
@@ -14,7 +14,8 @@ import { updateSelectedGroup,
 					updateEditState,
 					startUpdateApplicationVar,
 					startDeleteApplicationVar,
-					updateSearchText } from '../actions/actions';
+					updateSearchText,
+					updateHideLocked } from '../actions/actions';
 
 //QV Variable manipulation functions
 import { createGroupList, filterVars } from '../api';
@@ -38,9 +39,9 @@ class QVVarsDisplay extends React.Component {
 		)
 	}
 	renderQVVariables() {
-		let { appState, qvVariables } = this.props;
+		let { appState, appState: { searchText, selectedGroup, hideLocked }, qvVariables } = this.props;
 		//Get an array of var objects based on the Group selected (could be all variables)
-		let filteredVars = filterVars(qvVariables, appState.searchText, appState.selectedGroup || 'All');
+		let filteredVars = filterVars(qvVariables, appState.searchText, appState.selectedGroup || 'All', hideLocked);
 		//Get an array of distinct groups in the full qvVars array (for specific applciation that was selected)
 		let groupList = createGroupList([...this.props.qvVariables]);
 		//Get a list of groups matching what is in filteredVars (i.e. if someone selected a group, we only want to have the group in our groupList)
@@ -115,24 +116,26 @@ class QVVarsDisplay extends React.Component {
 		}
 		return (
 			<div>
+
 				<div className="row align-center">
-					<h3 className="text-center">Variable Groups for {this.props.applications.selectedApplication}</h3>
+					<h3 className="text-center">Variables for {this.props.applications.selectedApplication}</h3>
 				</div>
+
 				<div className="row">
-					<div className="column small-6">
+					<div className="column small-4">
 						{this.renderGroupSelect()}
 					</div>
 
-					<div className="column small-6">
+					<div className="column small-5">
+						<label>Search Variable Names</label>
 						<input
 								type="text"
 								placeholder="Search"
 								value={this.props.appState.searchText}
 								onChange={(e) => this.props.dispatch(updateSearchText(e.target.value))}
-								style={{display:"inline-block",width:"80%"}}
+								style={{display:"inline-block",width:"85%"}}
 						/>
-
-					<button type="button" className="hollow button small"
+						<button type="button" className="hollow button small"
 							onClick={() => {
 									this.props.dispatch(updateSearchText(''));
 									this.props.dispatch(updateSelectedGroup(''));
@@ -143,7 +146,12 @@ class QVVarsDisplay extends React.Component {
 							<Icon type="close" />
 						</button>
 					</div>
-
+					<div className="column small-3">
+						<label>Quick Search</label>
+						<Checkbox onChange={(e) => this.props.dispatch(updateHideLocked(e.target.checked))}>
+							Hide Locked Variables
+						</Checkbox>
+					</div>
 				</div>
 
 				{this.renderQVVariables()}

@@ -3,7 +3,11 @@ import * as C from '../actions/actions';
 export const appStateReducer = (state = [], action) => {
 	switch (action.type) {
 		case C.UPDATE_GROUP_VALUE:
+		//When updating a group value, there are certain appState items that should
+		//be reset, like clearing any "selectedVariableId", setting editing to false
+		//and clearing any search.  We do leave the hideLocked flag set to whatever was set.
 			return {
+					...state,
 					selectedGroup: action.selectedGroup,
 					selectedVariableId: null,
 					editing: false,
@@ -31,13 +35,19 @@ export const appStateReducer = (state = [], action) => {
 				selectedGroup: '',
 				selectedVariableId: null,
 				editing: false,
-				searchText: ''
+				searchText: '',
+				hideLocked: false
 			};
 
 		case C.UPDATE_SEARCH_TEXT:
 			return {
 				...state,
 				searchText: action.payload
+			};
+		case C.UPDATE_HIDE_LOCKED:
+			return {
+				...state,
+				hideLocked: action.payload
 			};
 		default:
 			return state;

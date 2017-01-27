@@ -37,7 +37,7 @@ import ExportContainer from './components/ExportContainer';
 //-- this.props.params.id
 export default (
 	<Route path="/" component={Main}>
-		<IndexRoute component={Login}/>
+		<IndexRoute component={MainDisplay}/>
 		<Route path="main" component={MainDisplay} />
 		<Route path="addqvvar" component={AddQVVarContainer} />
 		<Route path="export" component={ExportContainer} />
