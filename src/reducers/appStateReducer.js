@@ -1,4 +1,4 @@
-import * as C from '../actions/actions';
+import * as C from '../actions';
 
 export const appStateReducer = (state = [], action) => {
 	switch (action.type) {
@@ -32,6 +32,7 @@ export const appStateReducer = (state = [], action) => {
 		//--clear out the selectedGroup, selectedVariableId & set editing flag to false
 		case C.LOAD_APPLICATION_VARS:
 			return {
+				...state,
 				selectedGroup: '',
 				selectedVariableId: null,
 				editing: false,
@@ -49,6 +50,11 @@ export const appStateReducer = (state = [], action) => {
 				...state,
 				hideLocked: action.payload
 			};
+		case C.UPDATE_USER:
+			return {
+				...state,
+				user: action.payload
+			}
 		default:
 			return state;
 	}

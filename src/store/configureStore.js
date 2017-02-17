@@ -23,8 +23,11 @@ const INITIAL_STATE = {
 			qvVariables: [],
 			appState: {
 				selectedGroup: '',
+				selectedVariableId: null,
+				editing: false,
 				searchText: '',
-				hideLocked: false
+				hideLocked: false,
+				user: 'user'
 			}
 		};
 //--------------------------------------------

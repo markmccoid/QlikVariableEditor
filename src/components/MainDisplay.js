@@ -4,12 +4,17 @@ import { connect } from 'react-redux';
 import QVAppList from './QVAppList';
 import QVVarsDisplay from './QVVarsDisplay';
 import * as api from '../api';
+import { startLoadApplicationList } from '../actions';
 
 class MainDisplay extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-
+	componentWillMount() {
+		//When component mounts, clear out the Application Variable state
+		//This will clear out the qvVariables, applications and appState redux store nodes
+		this.props.dispatch(startLoadApplicationList());
+	}
 	render() {
 		return (
 			<div className="row">

@@ -1,19 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
-import { createGroupList, addQlikVariable, getApplicationVariables } from '../api';
+import { getAllGroups,
+				 createGroupList,
+	 			 addQlikVariable,
+				 getApplicationVariables,
+				 getApplicationData,
+				 addAppName } from '../api';
+import { loadApplicationVariables } from '../actions';
 import AddQVVarForm from 'AddQVVarForm';
+
 
 class AddQVVarContainer extends React.Component {
 	state = {
 		currApplication: '',
+		applicationList: [],
 		groupList: []
 	};
 
 //Handles the Save to Server of the new QV variable
 	handleSaveToServer = (data) => {
-		//data is expected to be an object with the needed fields to add a QV Var
-		addQlikVariable(data)
+		//data in an object with the fields the from AddQVVarForm.js
+		//data = {application, group, name, description, expression, notes, locked}
+		//We need to add on the addition fields: addDate, editDate, user
+		let newVarData = {...data};
+		newVarData.createDate = moment().unix();
+		newVarData.createUser = this.props.user;
+		newVarData.modifyDate = '';
+
+		//Call the serverAPI to add this new variable
+		addQlikVariable(newVarData)
 			.then(resp => {
 				this.setState({
 					currApplication: 'Select an Application...',
@@ -29,16 +46,66 @@ class AddQVVarContainer extends React.Component {
 		});
 	}
 //Handles when an application is selected and/or changed
-	handleOnApplicationChange = (newApplication) => {
+	handleOnApplicationChange = (newApplication, groupSearch) => {
 		let currApplication = newApplication
-		//Get the Variables for the selected application and create a grouplist from it
-		//We slice off the first group because it will be the default 'All' group.
-		getApplicationVariables(newApplication)
-			.then(data => this.setState({
-					groupList: createGroupList(data).slice(1),
-					currApplication
-				})
-			);
+		console.log(newApplication);
+		//if groupSearch is true, then we only want to return groups for the current application
+		if (groupSearch) {
+			this.handleCheckboxGroupSearch(currApplication, groupSearch)
+		} else {
+			//Get the Variables for the selected application and create a grouplist from it
+			//We slice off the first group because it will be the default 'All' group.
+			getAllGroups()
+				.then(data => {
+						this.setState({
+							groupList: data,
+							currApplication
+						});
+					}
+				);
+		}
+	}
+	handleNewApplicationName = newAppName => {
+		//Call api call to add the new app name to the appnames.json file
+		addAppName(newAppName)
+			.then(resp => {
+				if (resp.error) {
+					console.log('AddQVVarContainer.js - handleNewApplicationName-', resp.error);
+				}
+				getApplicationData()
+					.then(data => {
+						this.setState({
+							applicationList: data.map(obj => obj.appName)
+						});
+					});
+			});
+	}
+	handleCheckboxGroupSearch = (currApp,checked) => {
+		//If checked we are just going to get the groups in that variable list
+		if (checked) {
+			getApplicationVariables(currApp)
+				.then(data => {
+					this.setState({
+							groupList: createGroupList(data).slice(1),
+							currApplication: currApp
+						});
+					}
+					);
+		} else {
+			//If not checked we will return all groups using the handleOnApplicationChange function
+			this.handleOnApplicationChange(currApp, false);
+		}
+	}
+	componentDidMount () {
+		//When component mounts, clear out the Application Variable state
+		//This will clear out the qvVariables, applications and appState redux store nodes
+		this.props.dispatch(loadApplicationVariables('', ''));
+		getApplicationData()
+			.then(data => {
+				this.setState({
+					applicationList: data.map(obj => obj.appName)
+				});
+			});
 	}
 	render() {
 		let renderAllFields = false;
@@ -51,8 +118,10 @@ class AddQVVarContainer extends React.Component {
 				onSaveToSever={this.handleSaveToServer}
 				onClearForm={this.handleOnClearForm}
 				onApplicationChange={this.handleOnApplicationChange}
+				onNewApplicationName={this.handleNewApplicationName}
+				onCheckboxGroupSearch={this.handleCheckboxGroupSearch}
 				dispatch={this.props.dispatch}
-				applicationList={this.props.applicationList}
+				applicationList={this.state.applicationList}
 				currApplication={this.state.currApplication}
 				groupList={this.state.groupList}
 				initialValues={this.props.initialValues}
@@ -61,10 +130,13 @@ class AddQVVarContainer extends React.Component {
 	}
 }
 
+
+	//applicationList: state.applications.applicationList,
+
 const mapStateToProps = (state) => {
 	return {
-		applicationList: state.applications.applicationList,
-		initialValues: {application: 'Select an Application...', locked: false}
+		initialValues: {application: 'Select an Application...', locked: false},
+		user: state.appState.user
 	};
 };
 

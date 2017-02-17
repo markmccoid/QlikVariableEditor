@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Router, IndexRoute, browserHistory, hashHistory } from 'react-router'; //ES6 destructuring
 import { Provider } from 'react-redux';
-import { startLoadApplicationList } from './actions/actions';
+import { startLoadApplicationList } from './actions';
 
 import routes from './routes';
 //import firebase from 'app/firebase';
@@ -32,7 +32,8 @@ import routes from './routes';
 let store = require('./store/configureStore').configure();
 
 //Load initial state which is the application list
-store.dispatch(startLoadApplicationList());
+//Not using here anymore, doing it on componentWillMount in MainDisplay
+//store.dispatch(startLoadApplicationList());
 //-------------------------------------------------------
 
 //Load foundation

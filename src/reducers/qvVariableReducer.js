@@ -1,4 +1,4 @@
-import * as C from '../actions/actions';
+import * as C from '../actions';
 
 export const qvVariableReducer = (state = [], action) => {
 	switch (action.type) {

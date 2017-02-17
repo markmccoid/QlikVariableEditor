@@ -2,7 +2,7 @@ import React from 'react';
 import * as api from '../api';
 import { connect, dispatch } from 'react-redux';
 
-import { startLoadApplicationVars } from '../actions/actions';
+import { startLoadApplicationVars } from '../actions';
 
 
 class QVAppList extends React.Component {

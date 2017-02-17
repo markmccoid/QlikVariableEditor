@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, destroy } from 'redux-form';
 import { Icon } from 'antd';
-
+import moment from 'moment';
 
 
 const validate = values => {
@@ -59,6 +59,25 @@ class QVVarItemEdit extends React.Component {
 			</div>
 		);
 	}
+	renderLockedInput (props) {
+		const lockedValue = props.input.value
+		console.log('renderLockedInput', lockedValue);
+		return (
+			<div>
+				<label style={{height:"28px"}}>{props.placeholder}:</label>
+					<div
+						className={lockedValue ? "field-item locked" : "field-item"}
+						onClick={ e => {
+							props.input.onChange(!lockedValue);
+						}}
+					>
+					{lockedValue ?
+						<span>Locked <Icon type="lock" style={{float: "right"}}/></span> :
+						<span>Unlocked <Icon type="unlock" style={{float: "right"}}/></span> }
+					</div>
+				</div>
+		);
+	}
 	render() {
 		const { id, name, description, expression, notes, locked } = this.props.qvVar;
 		const { handleSubmit, invalid, submitting } = this.props;
@@ -68,6 +87,9 @@ class QVVarItemEdit extends React.Component {
 
 		//function to save form data to server
 		const saveToServer = data => {
+			//when editing a variable the user cannot change the
+			//application, addDate or user fields, this is why we
+			//are pulling these fields values from the qvVar props object
 			let saveObj = {
 				id,
 				application: this.props.qvVar.application,
@@ -76,7 +98,9 @@ class QVVarItemEdit extends React.Component {
 				expression: data.expression,
 				description: data.description,
 				notes: data.notes,
-				locked: data.locked
+				locked: data.locked,
+				modifyDate: moment().unix(),
+				modifyUser: this.props.editingUser
 			};
 			//dispatch action from QVVarsDispaly.js
 			this.props.onSaveEdit(saveObj);
@@ -101,7 +125,7 @@ class QVVarItemEdit extends React.Component {
 						<Field name="notes" component={this.renderTextArea} type="text" placeholder="Notes"/>
 					</div>
 					<div className="column small-4">
-		        <Field name="locked" component={this.renderField} type="checkbox" placeholder="Locked"/>
+		        <Field name="locked" component={this.renderLockedInput} type="" placeholder="Locked?"/>
 		      </div>
 					<div className="column small-12">
 						<button
@@ -121,7 +145,14 @@ class QVVarItemEdit extends React.Component {
 QVVarItemEdit.propTypes = {
 	onCancelEdit: React.PropTypes.func, //redux action to update edit indicator
   onSaveEdit: React.PropTypes.func, //redux function to update selectedVariableId in store
-	initialValue: React.PropTypes.object,
+	initialValue: React.PropTypes.shape({
+		name: React.PropTypes.string,
+		description: React.PropTypes.string,
+		expression: React.PropTypes.string,
+		notes: React.PropTypes.string,
+		locked: React.PropTypes.boolean,
+		group: React.PropTypes.string
+	}),
 	groupList: React.PropTypes.array,
 	qvVar: React.PropTypes.shape({
 		id: React.PropTypes.string,
@@ -134,8 +165,13 @@ QVVarItemEdit.propTypes = {
 									]),
 		notes: React.PropTypes.string,
 		group: React.PropTypes.string,
-		locked: React.PropTypes.boolean
-	})
+		locked: React.PropTypes.boolean,
+		createDate: React.PropTypes.number,
+		modifyDate: React.PropTypes.number,
+		createUser: React.PropTypes.string,
+		modifyUser: React.PropTypes.string
+	}),
+	editingUser: React.PropTypes.string
 };
 export default reduxForm({
 		form: 'qvVar',

@@ -8,7 +8,7 @@ const app = express();
 const X2JS = require('x2js'); //npm module to convert js object to XML
 
 const DATA_FILE = path.join(__dirname, 'qvvariables.json');
-
+const APPNAME_DATA = path.join(__dirname, 'appnames.json');
 
 
 app.set('port', (process.env.PORT || 3000));
@@ -52,22 +52,23 @@ app.get('/api/variables/app', (req, res) => {
 //--array containing only the qvvariable objects for that
 //--specific application as a javascript object.
 //--Also expecting a querystring/url-encoded data
-//--"?format=xml" OR "?format=json" defualt is json.
+//--"?format=xml" OR "?format=json" default is json.
 //---------------------------------------------------
 app.get('/api/variables/app/:appName', (req, res) => {
 
   fs.readFile(DATA_FILE, (err, data) => {
     let qvVars = JSON.parse(data); //convert json to js object
-    let appName = req.params.appName.toLowerCase();
+    let appName = req.params.appName.toLowerCase(); //get querystring if available
 		let appNameSansSpaces = appName.replace(/\s+/g, '');
     let applicationVars = qvVars.filter(qvVar => qvVar.application.toLowerCase() === appName);
 		//If requesting XML, get XML Data.
 		if (req.query.format === 'xml') {
 			const x2js = new X2JS();
 			let xmlString = x2js.js2xml({variable: applicationVars});
+      //Enclose xml created with the appName, otherwise Qlik won't recognize properly
 			applicationVars = `<${appNameSansSpaces}>${xmlString}</${appNameSansSpaces}>`;
-			//write the variables array back to disk
-			fs.writeFile(path.join(__dirname, `${appName}.xml`), applicationVars, () => {
+			//write the variables array back to the server disk navigating to the include directory
+			fs.writeFile(path.join(__dirname, '../include/',`${appName}.xml`), applicationVars, () => {
 				console.log(`file written: ${appName}.xml`);
 			});
 		}
@@ -96,10 +97,16 @@ app.post('/api/variables', (req, res) => {
 			description: req.body.description,
 			notes: req.body.notes || '',
 			group: req.body.group,
-			locked: req.body.locked
+			locked: req.body.locked,
+			createDate: req.body.createDate,
+			modifyDate: '',
+			createUser: req.body.createUser,
+      modifyUser: ''
 		};
+
 		//--add this new variable object too the variables array
     variables.push(newVar);
+		console.log('newvar', newVar);
     //write the variables array back to disk
     fs.writeFile(DATA_FILE, JSON.stringify(variables), () => {
     	let applicationVars = variables.filter(qvVar => qvVar.application.toLowerCase() === req.body.application.toLowerCase());
@@ -137,6 +144,8 @@ app.put('/api/variables', (req, res) => {
 				qvVar.notes = req.body.notes;
 				qvVar.group = req.body.group;
 				qvVar.locked = req.body.locked;
+				qvVar.modifyDate = req.body.modifyDate,
+        qvVar.modifyUser = req.body.modifyUser;
     	}
     });
     //write the variables array back to disk
@@ -167,6 +176,134 @@ app.delete('/api/variables/:id', (req, res) => {
       res.end();
     });
   });
+});
+
+//==========================================================
+//--API info for /api/settings/...
+//==========================================================
+//---------------------------------------------------
+//--A get to api/variables will return the applications.json
+//--file as a javascript object.
+//---------------------------------------------------
+app.get('/api/settings/appnames', (req, res) => {
+	fs.readFile(APPNAME_DATA, (err, data) => {
+		const appnames = JSON.parse(data);
+		res.setHeader('Cache-Control', 'no-cache');
+		res.send(appnames);
+	});
+});
+//---------------------------------------------------
+//--A POST to api/settings/appnames will cause the object sent
+//--to be added to the appnames.json file.
+//--A new object of all appnames will be returned
+//---------------------------------------------------
+app.post('/api/settings/appnames', (req, res) => {
+	//If we send an JS object to a post, req.body will have the object in it.
+  let newAppName = req.body.appName;
+  fs.readFile(APPNAME_DATA, (err, data) => {
+    const appnames = JSON.parse(data);
+    //Check to make sure new name doesn't already exist
+    //Filtering and then checking the length of array return and converting to a boolean
+		const dupAppName = appnames.filter(name => name.appName === newAppName).length > 0;
+    if (dupAppName) {
+      res.setHeader('Cache-Control', 'no-cache');
+      //return the variables file so application can update it's
+      res.json({
+					response: appnames,
+					error: 'Duplicate Application Name'
+				});
+      return;
+    }
+    const newAppNameObj = {
+			id: uuid.v4(),
+			appName: req.body.appName
+		};
+		//--add this new variable object too the variables array
+    appnames.push(newAppNameObj);
+    //write the variables array back to disk
+    fs.writeFile(APPNAME_DATA, JSON.stringify(appnames), () => {
+      res.setHeader('Cache-Control', 'no-cache');
+      //return the variables file so application can update it's
+      res.json(appnames);
+    });
+  });
+});
+
+//---------------------------------------------------
+//--A PUT to api/settings/appnames will cause the object sent
+//--to be updated in the appnames.json file.
+//--an empty object {} will be returned
+//---------------------------------------------------
+app.put('/api/settings/appnames', (req, res) => {
+  fs.readFile(APPNAME_DATA, (err, data) => {
+    const appnames = JSON.parse(data);
+    //Get the old appName that we will be updating
+    const oldAppName = appnames.filter(appname => appname.id === req.body.id)[0].appName;
+    console.log(oldAppName);
+    //Find the appname to be updated
+    appnames.forEach(app => {
+    	if (app.id === req.body.id) {
+				app.appName = req.body.appName;
+    	}
+    });
+    //Now read the qvVariables.json file and change all the application names
+    //the match the oldAppName to the new appName
+    fs.readFile(DATA_FILE, (err, data) =>{
+      const variables = JSON.parse(data);
+      const newVariablesArray = _.forEach(variables, variable => {
+        if (variable.application === oldAppName) {
+          variable.application = req.body.appName;
+        }
+      });
+      fs.writeFile(DATA_FILE, JSON.stringify(newVariablesArray), (err)=> {
+        if (err) {
+          console.log(`error writing file - ${DATA_FILE} - in PUT api/seeting/appnames`)
+        }
+      });
+    });
+    //write the appnames array back to disk
+    fs.writeFile(APPNAME_DATA, JSON.stringify(appnames), () => {
+      res.setHeader('Cache-Control', 'no-cache');
+      res.json({});
+      res.end();
+    });
+  });
+});
+
+//---------------------------------------------------
+//--A DELETE to api/variables will cause the object with
+//--the id sent to be deleted
+//--an empty object {} will be returned
+//---------------------------------------------------
+app.delete('/api/settings/appnames/:id', (req, res) => {
+  const appNamesFile = JSON.parse(fs.readFileSync(APPNAME_DATA));
+  //Get the appName to delete since we are only getting the id
+  console.log(req.params.id);
+
+  const newAppNames = appNamesFile.filter(obj => obj.id !== req.params.id);
+  fs.writeFile(APPNAME_DATA, JSON.stringify(newAppNames), (err) => {
+    if (err) {
+      console.log(`Error deleting ${req.params.id} from appnames.json`);
+    } else {
+      res.setHeader('Cache-Control', 'no-cache');
+      res.json({});
+      res.end();
+    }
+  })
+//The chunk below can be used if we want to delete stuff from the qvVariables.json file too
+//  appNameToDelete = appNamesFile.filter(obj => obj.id === req.params.id)[0].appName;
+  // fs.readFile(DATA_FILE, (err, data) => {
+  //   const variables = JSON.parse(data);
+  //   //Find out if any variables have the appName to be deleted as the application property
+  //   const varsToKeep = variables.filter(qvVar => qvVar.application !== appNameToDelete);
+  //   //write the variables array back to disk
+  //   fs.writeFile(DATA_FILE, JSON.stringify(varsToKeep), (err) => {
+  //     res.setHeader('Cache-Control', 'no-cache');
+  //     //return the variables file so application can update it's
+  //     res.json({});
+  //     res.end();
+  //   });
+  // });
 });
 
 app.listen(app.get('port'), () => {

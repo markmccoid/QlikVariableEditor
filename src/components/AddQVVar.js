@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, destroy } from 'redux-form';
 
-import { startLoadApplicationVars } from '../actions/actions';
 import { createGroupList, addQlikVariable, getApplicationVariables } from '../api';
 
 //Validation function that redux forms will use to validate input

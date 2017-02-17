@@ -1,6 +1,8 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
+//Comment
 const APP_DROPDOWN_DEFAULT = 'Select an Application...';
 const GROUP_DROPDOWN_DEFAULT = 'Select an Group...';
 
@@ -48,7 +50,10 @@ const renderTextArea = (props) => {
 const renderDropDown = (props) => {
 	return (
 		<div>
-			<label style={{height:"28px"}}>{props.placeholder}:</label>
+				<label style={{height:"28px", display:"inline"}}>{props.placeholder}:</label>
+				<label style={{display:"inline", paddingLeft: "10px"}}>Groups in App Only
+					<input onChange={props.onCheckboxChange}
+						type="checkbox" /></label>
 			<select {...props.input}>
 				{props.data.map(item => <option key={item} value={item}>{item}</option>)}
 			</select>
@@ -73,16 +78,34 @@ const renderDropDownWOnChange = (props) => {
 };
 
 class AddQVVarForm extends React.Component {
+	state = {
+		newGroupName: '',
+		checkBoxSearch: false
+	};
 
 	render() {
 	  const { handleSubmit, invalid, submitting, renderAllFields } = this.props;
-		const noSpaces = value => value.replace(/ /g,'');
+		//const { newAppName } = this.props.qvAddVar.values ?  this.props.qvAddVar.values : undefined;
+		const { newAppName } = this.props.qvAddVar ? this.props.qvAddVar.values || {newAppName: undefined} : {newAppName: undefined};
+		const styles = {
+			hideDiv: {
+				display: "none"
+			}
+		};
+		const onCheckBoxChange = e => {
+				const currApp = this.props.qvAddVar.values.application;
+				//Just setting here so that we can pass info when we change the application name from the drop down.
+				//Probably a better way, but for now this works.
+				this.setState({checkBoxSearch: e.target.checked});
+				this.props.onCheckboxGroupSearch(currApp, e.target.checked);
+		};
+  	const noSpaces = value => value.replace(/ /g,'');
 		let formNextFields = '';
 		if (renderAllFields) {
 			formNextFields =
 				<div>
 					<div className="column small-3">
-							<Field name="group" component={renderDropDown} type="select" placeholder="Group" data={[GROUP_DROPDOWN_DEFAULT, ...this.props.groupList]} />
+							<Field name="group" component={renderDropDown} type="select" placeholder="Group" data={[GROUP_DROPDOWN_DEFAULT, ...this.props.groupList]} onCheckboxChange={onCheckBoxChange}/>
 					</div>
 					<div className="column small-6">
 						<Field name="name" component={renderField} type="text" placeholder="Name(no spaces)" normalize={noSpaces}/>
@@ -113,7 +136,6 @@ class AddQVVarForm extends React.Component {
 					</div>
 				</div>;
 		}
-
 		return (
 			<div className="row">
 				<div className="columns callout secondary" style={{margin:"0 15px"}}>
@@ -127,10 +149,21 @@ class AddQVVarForm extends React.Component {
 									<Field name="application"
 										component={renderDropDownWOnChange} type="select"
 										placeholder="Application"
-										myOnChange={(e) => this.props.onApplicationChange(e.target.value)}
+										myOnChange={(e) => this.props.onApplicationChange(e.target.value, this.state.checkBoxSearch)}
 										data={[APP_DROPDOWN_DEFAULT, ...this.props.applicationList]}
 										currApplication={this.props.currApplication}
 									/>
+							</div>
+
+							<div className="column small-5 float-left" style={renderAllFields ? styles.hideDiv : {}}>
+								<Field name="newAppName" component={renderField} type="text" placeholder="Enter New Application Name"/>
+								<a 	className="button primary"
+										onClick={() => {
+												this.props.onNewApplicationName(newAppName);
+											}
+										}>
+									Add New Application Name
+								</a>
 							</div>
 							{formNextFields}
 						</form>
@@ -145,14 +178,21 @@ AddQVVarForm.propTypes = {
 	onSaveToSever: React.PropTypes.func,
 	onClearForm: React.PropTypes.func,
 	onApplicationChange: React.PropTypes.func,
+	onNewApplicationName: React.PropTypes.func,
+	onCheckboxGroupSearch: React.PropTypes.func,
 	applicationList: React.PropTypes.array,
 	currApplication: React.PropTypes.string,
 	groupList: React.PropTypes.array
 }
 
+const mapStateToProps = state => {
+	return {
+		qvAddVar: state.form.qvAddVar || {}
+	}
+}
 AddQVVarForm = reduxForm({
 		form: 'qvAddVar',
 		validate
 	})(AddQVVarForm);
 
-export default AddQVVarForm;
+export default connect(mapStateToProps)(AddQVVarForm);

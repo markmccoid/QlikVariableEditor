@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <ScappleDocument ID="C6A1A221-30ED-4FA5-940B-7ECA7AA654D1" Version="1.1">
    <Notes>
-      <Note Width="133.862" FontSize="12" ID="0" Position="406.2,217.2">
+      <Note Width="133.862" FontSize="12" ID="0" Position="457.0,252.4">
          <Appearance>
             <Alignment>Left</Alignment>
             <Fill>0.808835 0.872419 0.801343</Fill>
@@ -10,7 +10,7 @@
          <String>Add QV Var Container</String>
          <ConnectedNoteIDs>10</ConnectedNoteIDs>
       </Note>
-      <Note Width="75.3906" FontSize="12" ID="1" Position="373.4,330.5">
+      <Note Width="75.3906" FontSize="12" ID="1" Position="466.4,343.0">
          <Appearance>
             <Alignment>Left</Alignment>
             <Fill>0.934157 0.888319 0.785290</Fill>

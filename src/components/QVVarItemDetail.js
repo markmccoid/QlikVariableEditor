@@ -39,7 +39,8 @@ const QVVarItemDetail = (props) => {
         <div className={locked ? "field-item locked" : "field-item"}>
           {locked ?
 						<span>Locked <Icon type="lock" style={{float: "right"}}/></span> :
-						<span>Unlocked <Icon type="unlock" style={{float: "right"}}/></span> } </div>
+						<span>Unlocked <Icon type="unlock" style={{float: "right"}}/></span> }
+				</div>
       </div>
       <div className="column small-12">
         <button className="button small" onClick={() => props.onEditVar(id)} style={{marginRight:"5px"}}>Edit</button>
