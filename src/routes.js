@@ -6,8 +6,8 @@ import Main from 'Main';
 import MainDisplay from 'MainDisplay';
 import Login from 'Login';
 import { loadApplicationVariables } from './actions';
-import AddQVVarContainer from './components/AddQVVarContainer';
-import ExportContainer from './components/ExportContainer';
+import AddQVVarContainer from './components/addVariable/AddQVVarContainer';
+import ExportContainer from './components/export/ExportContainer';
 import SettingsContainer from './components/settings/SettingsContainer';
 
 //--React Router middleware below.
@@ -43,7 +43,7 @@ import SettingsContainer from './components/settings/SettingsContainer';
 export default (
 	<Route path="/" component={Main}>
 		<IndexRoute component={MainDisplay}/>
-		<Route path="main" component={MainDisplay} />
+
 		<Route path="addqvvar" component={AddQVVarContainer} />
 		<Route path="settings" component={SettingsContainer} />
 		<Route path="export" component={ExportContainer} />

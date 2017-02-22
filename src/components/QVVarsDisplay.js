@@ -148,7 +148,10 @@ class QVVarsDisplay extends React.Component {
 
 					<div className="column small-3">
 						<label>Quick Search</label>
-						<Checkbox onChange={(e) => this.props.dispatch(updateHideLocked(e.target.checked))}>
+						<Checkbox
+							checked={this.props.appState.hideLocked}
+							onChange={(e) => this.props.dispatch(updateHideLocked(e.target.checked))}
+						>
 							Hide Locked Variables
 						</Checkbox>
 					</div>

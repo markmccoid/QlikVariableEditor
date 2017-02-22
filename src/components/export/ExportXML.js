@@ -2,7 +2,7 @@ import React from 'react';
 import fileSaver from 'file-saver';
 var alertify = require('alertifyjs');
 
-import { getXMLApplicationVariables } from '../api';
+import { getXMLApplicationVariables } from '../../api';
 
 //-Component gets the list of variables in an XML format from the server
 //-Then uses the file-saver module to save the file

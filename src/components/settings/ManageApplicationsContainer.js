@@ -37,7 +37,14 @@ class ManageApplicationsContainer extends React.Component {
 				} else {
 					//If not used, simply delete appname from the appnames.json file
 					deleteAppName(appId)
-						.then(resp => alert(`Application ${appName} was deleted`));
+						.then(resp => {
+							getApplicationData()
+								.then(data => {
+										this.setState({applications: data, editingAppId: null});
+										alert(`Application ${appName} was deleted`);
+									}
+								);
+						});
 				}
 			});
   }

@@ -7,9 +7,9 @@ import { getAllGroups,
 	 			 addQlikVariable,
 				 getApplicationVariables,
 				 getApplicationData,
-				 addAppName } from '../api';
-import { loadApplicationVariables } from '../actions';
-import AddQVVarForm from 'AddQVVarForm';
+				 addAppName } from '../../api';
+import { loadApplicationVariables } from '../../actions';
+import AddQVVarForm from './AddQVVarForm';
 
 
 class AddQVVarContainer extends React.Component {
@@ -75,7 +75,8 @@ class AddQVVarContainer extends React.Component {
 				getApplicationData()
 					.then(data => {
 						this.setState({
-							applicationList: data.map(obj => obj.appName)
+							applicationList: data.map(obj => obj.appName),
+							currApplication: newAppName
 						});
 					});
 			});

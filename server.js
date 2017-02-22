@@ -68,7 +68,8 @@ app.get('/api/variables/app/:appName', (req, res) => {
       //Enclose xml created with the appName, otherwise Qlik won't recognize properly
 			applicationVars = `<${appNameSansSpaces}>${xmlString}</${appNameSansSpaces}>`;
 			//write the variables array back to the server disk navigating to the include directory
-			fs.writeFile(path.join(__dirname, '../include/',`${appName}.xml`), applicationVars, () => {
+      console.log(path.join(__dirname, '../Spreadsheets/',`${appName}.xml`));
+			fs.writeFile(path.join(__dirname, '../Spreadsheets/',`${appName}.xml`), applicationVars, () => {
 				console.log(`file written: ${appName}.xml`);
 			});
 		}

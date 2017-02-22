@@ -167,7 +167,10 @@ QVVarItemEdit.propTypes = {
 		group: React.PropTypes.string,
 		locked: React.PropTypes.boolean,
 		createDate: React.PropTypes.number,
-		modifyDate: React.PropTypes.number,
+		modifyDate: React.PropTypes.oneOfType([
+								    React.PropTypes.string,
+								    React.PropTypes.number
+									]),
 		createUser: React.PropTypes.string,
 		modifyUser: React.PropTypes.string
 	}),

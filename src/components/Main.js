@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 //Import Components
 import Navbar from 'Navbar';
 
@@ -11,13 +13,17 @@ constructor(props) {
 	render() {
 		return (
 			<div >
-
-					<Navbar />
+					<Navbar user={this.props.user}/>
 					{this.props.children}
-
 			</div>
 		);
 	}
 }
 
-export default Main;
+const mapStateToProps = state => {
+	return {
+		user: state.appState.user
+	};
+};
+
+export default connect(mapStateToProps)(Main);
