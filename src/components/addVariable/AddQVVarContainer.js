@@ -15,6 +15,7 @@ import AddQVVarForm from './AddQVVarForm';
 class AddQVVarContainer extends React.Component {
 	state = {
 		currApplication: '',
+		newGroupName: '',
 		applicationList: [],
 		groupList: []
 	};
@@ -48,7 +49,6 @@ class AddQVVarContainer extends React.Component {
 //Handles when an application is selected and/or changed
 	handleOnApplicationChange = (newApplication, groupSearch) => {
 		let currApplication = newApplication
-		console.log(newApplication);
 		//if groupSearch is true, then we only want to return groups for the current application
 		if (groupSearch) {
 			this.handleCheckboxGroupSearch(currApplication, groupSearch)
@@ -57,12 +57,12 @@ class AddQVVarContainer extends React.Component {
 			//We slice off the first group because it will be the default 'All' group.
 			getAllGroups()
 				.then(data => {
+						let groupList = this.state.newGroupName !== '' ? [this.state.newGroupName, ...data] : data;
 						this.setState({
-							groupList: data,
+							groupList, //: [this.state.newGroupName, ...data], //change
 							currApplication
 						});
-					}
-				);
+				});
 		}
 	}
 	handleNewApplicationName = newAppName => {
@@ -72,14 +72,28 @@ class AddQVVarContainer extends React.Component {
 				if (resp.error) {
 					console.log('AddQVVarContainer.js - handleNewApplicationName-', resp.error);
 				}
+				//Get the data from the applications.json file (current just application name)
 				getApplicationData()
 					.then(data => {
 						this.setState({
 							applicationList: data.map(obj => obj.appName),
 							currApplication: newAppName
 						});
+						getAllGroups()
+							.then(data => {
+									let groupList = this.state.newGroupName !== '' ? [this.state.newGroupName, ...data] : data;
+									this.setState({
+										groupList //: [this.state.newGroupName, ...data] //change
+									});
+							});
 					});
 			});
+	}
+	handleNewGroupName = newGroupName => {
+		this.setState({
+			groupList: [newGroupName, ...this.state.groupList],
+			newGroupName
+		});
 	}
 	handleCheckboxGroupSearch = (currApp,checked) => {
 		//If checked we are just going to get the groups in that variable list
@@ -87,7 +101,7 @@ class AddQVVarContainer extends React.Component {
 			getApplicationVariables(currApp)
 				.then(data => {
 					this.setState({
-							groupList: createGroupList(data).slice(1),
+							groupList: [this.state.newGroupName, ...createGroupList(data).slice(1)],
 							currApplication: currApp
 						});
 					}
@@ -120,6 +134,7 @@ class AddQVVarContainer extends React.Component {
 				onClearForm={this.handleOnClearForm}
 				onApplicationChange={this.handleOnApplicationChange}
 				onNewApplicationName={this.handleNewApplicationName}
+				onNewGroupName={this.handleNewGroupName}
 				onCheckboxGroupSearch={this.handleCheckboxGroupSearch}
 				dispatch={this.props.dispatch}
 				applicationList={this.state.applicationList}

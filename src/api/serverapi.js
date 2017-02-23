@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 
 export const getQlikVariables = () => {
 	//Get the variables.json file contents from the server
@@ -68,7 +69,7 @@ export const deleteQlikVariable = idToDelete => {
 //--Get the data from the applications.json file.
 export const getApplicationData = () => {
 	return axios.get('api/settings/appnames')
-		.then(resp => resp.data)
+		.then(resp => _.sortBy(resp.data, ['appName']))
 		.catch(error => console.log('Error in getApplicationData--', error));
 }
 

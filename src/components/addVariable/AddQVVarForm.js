@@ -1,6 +1,9 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+
+var alertify = require('alertifyjs');
 
 //Comment
 const APP_DROPDOWN_DEFAULT = 'Select an Application...';
@@ -51,7 +54,7 @@ const renderDropDown = (props) => {
 	return (
 		<div>
 				<label style={{height:"28px", display:"inline"}}>{props.placeholder}:</label>
-				<label style={{display:"inline", paddingLeft: "10px"}}>Groups in App Only
+				<label style={{display:"inline", paddingLeft: "10px"}}>Groups in App Only&nbsp;
 					<input onChange={props.onCheckboxChange}
 						type="checkbox" /></label>
 			<select {...props.input}>
@@ -69,7 +72,6 @@ const renderDropDownWOnChange = (props) => {
 					props.myOnChange(e);
 					props.input.onChange(e);
 				}}
-				value={props.currApplication}
 				>
 				{props.data.map(item => <option key={item} value={item}>{item}</option>)}
 			</select>
@@ -84,6 +86,7 @@ class AddQVVarForm extends React.Component {
 	};
 
 	render() {
+
 	  const { handleSubmit, invalid, submitting, renderAllFields } = this.props;
 		//const { newAppName } = this.props.qvAddVar.values ?  this.props.qvAddVar.values : undefined;
 		const { newAppName } = this.props.qvAddVar ? this.props.qvAddVar.values || {newAppName: undefined} : {newAppName: undefined};
@@ -99,13 +102,38 @@ class AddQVVarForm extends React.Component {
 				this.setState({checkBoxSearch: e.target.checked});
 				this.props.onCheckboxGroupSearch(currApp, e.target.checked);
 		};
+		const addNewApplication = () => {
+			//
+			alertify.prompt("Add New Application", "Enter a new application name.", "",
+				(evt, value) => {
+					this.props.onNewApplicationName(value);
+					//call the change from from redux-form to update the application field to what they entered
+					this.props.change('application', value);
+				},
+				() => {
+					alertify.error('Cancel Add New Application');
+				});
+		};
+		const addNewGroup = () => {
+			alertify.prompt("Add New Group", "Enter a new group name.", "",
+			  (evt, value) => {
+			    this.props.onNewGroupName(value);
+					//call the change from from redux-form to update the group field to what they entered
+					this.props.change('group', value);
+			  },
+			  () => {
+			    alertify.error('Cancel Add New Group');
+			  });
+		};
   	const noSpaces = value => value.replace(/ /g,'');
+
 		let formNextFields = '';
 		if (renderAllFields) {
 			formNextFields =
 				<div>
 					<div className="column small-3">
 							<Field name="group" component={renderDropDown} type="select" placeholder="Group" data={[GROUP_DROPDOWN_DEFAULT, ...this.props.groupList]} onCheckboxChange={onCheckBoxChange}/>
+							<a onClick={addNewGroup}>Add New Group</a>
 					</div>
 					<div className="column small-6">
 						<Field name="name" component={renderField} type="text" placeholder="Name(no spaces)" normalize={noSpaces}/>
@@ -150,20 +178,10 @@ class AddQVVarForm extends React.Component {
 										component={renderDropDownWOnChange} type="select"
 										placeholder="Application"
 										myOnChange={(e) => this.props.onApplicationChange(e.target.value, this.state.checkBoxSearch)}
-										data={[APP_DROPDOWN_DEFAULT, ...this.props.applicationList]}
+										data={[APP_DROPDOWN_DEFAULT, ..._.sortBy(this.props.applicationList)]}
 										currApplication={this.props.currApplication}
 									/>
-							</div>
-
-							<div className="column small-5 float-left" style={renderAllFields ? styles.hideDiv : {}}>
-								<Field name="newAppName" component={renderField} type="text" placeholder="Enter New Application Name"/>
-								<a 	className="button primary"
-										onClick={() => {
-												this.props.onNewApplicationName(newAppName);
-											}
-										}>
-									Add New Application Name
-								</a>
+								<a onClick={addNewApplication}>Add New Application Name</a>
 							</div>
 							{formNextFields}
 						</form>
@@ -179,6 +197,7 @@ AddQVVarForm.propTypes = {
 	onClearForm: React.PropTypes.func,
 	onApplicationChange: React.PropTypes.func,
 	onNewApplicationName: React.PropTypes.func,
+	onNewGroupName: React.PropTypes.func,
 	onCheckboxGroupSearch: React.PropTypes.func,
 	applicationList: React.PropTypes.array,
 	currApplication: React.PropTypes.string,
