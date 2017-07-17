@@ -6,7 +6,7 @@
     "start": "npm-run-all --parallel dev:*",
     "dev:server": "nodemon server.js",
     "dev:webpack": "webpack -w",
-    "test": "NODE_ENV=test karma start",
+    "prod": "webpack -p", "test": "NODE_ENV=test karma start",
     "build": "webpack -p",
     "postinstall": "webpack -p"
   },
@@ -33,7 +33,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "moment": "^2.17.1",
-    "node-sass": "^3.4.2",
+    "node-sass": "^4.5.3",
     "node-uuid": "^1.4.7",
     "react": "^15",
     "react-dom": "^15",

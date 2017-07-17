@@ -53,6 +53,7 @@ app.get('/api/variables/app', (req, res) => {
 //--specific application as a javascript object.
 //--Also expecting a querystring/url-encoded data
 //--"?format=xml" OR "?format=json" default is json.
+//--If format is xml, then file will also be written to server
 //---------------------------------------------------
 app.get('/api/variables/app/:appName', (req, res) => {
 
@@ -69,8 +70,12 @@ app.get('/api/variables/app/:appName', (req, res) => {
 			applicationVars = `<${appNameSansSpaces}>${xmlString}</${appNameSansSpaces}>`;
 			//write the variables array back to the server disk navigating to the include directory
       console.log(path.join(__dirname, '../Spreadsheets/',`${appName}.xml`));
-			fs.writeFile(path.join(__dirname, '../Spreadsheets/',`${appName}.xml`), applicationVars, () => {
-				console.log(`file written: ${appName}.xml`);
+			fs.writeFile(path.join(__dirname, '../Spreadsheets/',`${appName}.xml`), applicationVars, (err) => {
+				if (err) {
+					console.log(`Error Writing: ${appName}.xml`, err)
+				} else {
+					console.log(`file written: ${appName}.xml`);
+				}
 			});
 		}
     res.setHeader('Cache-Control', 'no-cache');
